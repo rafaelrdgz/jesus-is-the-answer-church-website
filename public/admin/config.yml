@@ -98,7 +98,13 @@ collections:
       - {label: "Publish Date", name: "pubDate", widget: "datetime"}
       - {label: "Description", name: "description", widget: "text", hint: "Short description for previews"}
       - {label: "Author", name: "author", widget: "string", default: "Church Staff"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/blog", required: false}
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog"}
+          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image for accessibility"}
       - {label: "Tags", name: "tags", widget: "list", default: ["general"]}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
       - {label: "Article Content", name: "body", widget: "markdown", hint: "Full blog post content"}
