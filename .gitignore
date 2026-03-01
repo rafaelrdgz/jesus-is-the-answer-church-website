@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # nodejs
 package-lock.json
+
+# Vercel
+.vercel/
