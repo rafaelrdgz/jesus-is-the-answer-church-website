@@ -3,7 +3,7 @@ backend:
   repo: rafaelrdgz/jesus-is-the-answer-church-website
   branch: main
   base_url: https://jesus-is-the-answer-church-website.vercel.app
-  auth_endpoint: api/auth  
+  auth_endpoint: oauth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
