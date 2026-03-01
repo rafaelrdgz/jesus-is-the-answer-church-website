@@ -7,15 +7,15 @@ import decapCmsOauth from 'astro-decap-cms-oauth';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jesus-is-the-answer-church-website.vercel.app', // Replace with your Vercel URL
-  output: 'static',
+  site: 'https://jesus-is-the-answer-church-website.vercel.app',
+  output: 'server',
   adapter: vercel(),
   integrations: [
     tailwind(),
     sitemap(),
     decapCmsOauth({
       decapCMSVersion: "3.3.3",
-      oauthDisabled: false, // Enable OAuth in production
+      oauthDisabled: false,
       adminDisabled: false,
     }),
   ],
