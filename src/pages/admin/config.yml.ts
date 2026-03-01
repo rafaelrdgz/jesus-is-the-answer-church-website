@@ -1,8 +1,13 @@
-backend:
+import type { APIRoute } from "astro";
+
+export const GET: APIRoute = ({ site }) => {
+  const siteUrl = site?.origin || "http://localhost:4321";
+
+  const config = `backend:
   name: github
   repo: rafaelrdgz/jesus-is-the-answer-church-website
   branch: main
-  base_url: https://jesus-is-the-answer-church-website.vercel.app
+  base_url: ${siteUrl}
   auth_endpoint: oauth
 
 media_folder: "public/uploads"
@@ -118,3 +123,12 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string", hint: "For identifying the content block", isName: true}
       - {label: "Body", name: "body", widget: "markdown", hint: "Content details (hours, schedules, etc.)"}
+`;
+
+  return new Response(config, {
+    headers: {
+      "Content-Type": "text/yaml; charset=utf-8",
+      "Cache-Control": "no-cache",
+    },
+  });
+};

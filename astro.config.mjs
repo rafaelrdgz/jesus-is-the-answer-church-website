@@ -7,7 +7,7 @@ import decapCmsOauth from 'astro-decap-cms-oauth';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jesus-is-the-answer-church-website.vercel.app',
+  site: process.env.SITE_URL || 'http://localhost:4321',
   output: 'server',
   adapter: vercel(),
   integrations: [
