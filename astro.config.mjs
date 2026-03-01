@@ -7,7 +7,7 @@ import decapCmsOauth from 'astro-decap-cms-oauth';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // Replace with your site URL
+  site: 'https://jesus-is-the-answer-church-website.vercel.app', // Replace with your Vercel URL
   output: 'static',
   adapter: vercel(),
   integrations: [
@@ -15,7 +15,7 @@ export default defineConfig({
     sitemap(),
     decapCmsOauth({
       decapCMSVersion: "3.3.3",
-      oauthDisabled: true, // Disable OAuth in dev, enable in Vercel with env vars
+      oauthDisabled: false, // Enable OAuth in production
       adminDisabled: false,
     }),
   ],
