@@ -28,6 +28,7 @@ collections:
       - {label: "Bio", name: "bio", widget: "text", required: false}
       - {label: "Order", name: "order", widget: "number", default: 0}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Extended bio and details"}
 
   # Events - Eventos
   - name: "events"
@@ -47,6 +48,7 @@ collections:
       - {label: "Registration Link", name: "registrationLink", widget: "string", required: false}
       - {label: "Registration Required", name: "registrationRequired", widget: "boolean", default: false}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Full event details and description"}
 
   # Sermons - Predicas
   - name: "sermons"
@@ -66,6 +68,7 @@ collections:
       - {label: "Summary", name: "summary", widget: "text", required: false}
       - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Sermon Overview", name: "body", widget: "markdown", required: false, hint: "Full sermon notes: overview, key points, discussion questions"}
 
   # Ministries - Ministerios
   - name: "ministries"
@@ -82,6 +85,7 @@ collections:
       - {label: "Schedule", name: "schedule", widget: "string", required: false}
       - {label: "Order", name: "order", widget: "number", required: false}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Full ministry description, programs, volunteer info"}
 
   # Blog - Blog
   - name: "blog"
@@ -97,6 +101,7 @@ collections:
       - {label: "Image", name: "image", widget: "image", folder: "/uploads/blog", required: false}
       - {label: "Tags", name: "tags", widget: "list", default: ["general"]}
       - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Article Content", name: "body", widget: "markdown", hint: "Full blog post content"}
 
   # Site Info - Información del sitio
   - name: "siteInfo"
@@ -106,3 +111,4 @@ collections:
     slug: "{{slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string", hint: "For identifying the content block", isName: true}
+      - {label: "Body", name: "body", widget: "markdown", hint: "Content details (hours, schedules, etc.)"}
