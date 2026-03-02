@@ -11,9 +11,10 @@ export interface Props {
   href?: string;
   className?: string;
   imageLayout?: 'top' | 'background';
+  [key: string]: any;
 }
 
-const { title, image, href, className = "", imageLayout = 'top', dataSeries, dataSpeaker, dataDate} = Astro.props;
+const { title, image, href, className = "", imageLayout = 'top', dataSeries, dataSpeaker, dataDate, ...rest} = Astro.props;
 const Element = href ? "a" : "div";
 ---
 
@@ -23,6 +24,7 @@ const Element = href ? "a" : "div";
   data-series={dataSeries}
   data-speaker={dataSpeaker}
   data-date={dataDate}
+  {...rest}
   class:list={[
     'card group overflow-hidden',
     { 'relative': imageLayout === 'background' },

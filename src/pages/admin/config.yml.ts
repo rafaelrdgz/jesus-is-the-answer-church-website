@@ -52,7 +52,7 @@ collections:
       - {label: "Title / Título", name: "title", widget: "string", i18n: true}
       - {label: "Date / Fecha", name: "date", widget: "datetime", i18n: duplicate}
       - {label: "End Date / Fecha fin", name: "endDate", widget: "datetime", required: false, i18n: duplicate}
-      - {label: "Time / Hora", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false, i18n: true}
+      - {label: "Time / Hora", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false, i18n: duplicate}
       - {label: "Location / Lugar", name: "location", widget: "string", i18n: true}
       - {label: "Image", name: "image", widget: "image", folder: "/uploads/events", i18n: duplicate}
       - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
@@ -119,7 +119,7 @@ collections:
         name: "image"
         widget: "object"
         required: false
-        i18n: true
+        i18n: duplicate
         fields:
           - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog"}
           - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image / Describe la imagen"}
