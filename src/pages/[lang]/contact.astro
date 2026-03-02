@@ -11,6 +11,7 @@ export function getStaticPaths() {
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
 import Button from "../../components/UI/Button.astro";
+import GoogleMap from "../../components/UI/OpenStreetMap.astro";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
 
 const { lang } = Astro.params;
@@ -192,12 +193,7 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-          <div class="w-full h-full flex items-center justify-center bg-gray-300">
-            <p class="text-gray-600 text-center p-4">
-              {t('contact.mapPlaceholder')}<br>
-              <span class="text-sm">({t('contact.mapNote')})</span>
-            </p>
-          </div>
+          <GoogleMap height="100%" className="h-full w-full" markerText={langParams === 'es' ? `Iglesia ${t('footer.churchName')}` : `${t('footer.churchName')} Church`} />
         </div>
         <div>
           <div class="bg-white p-8 rounded-lg shadow-md">
