@@ -115,11 +115,14 @@ const languageLinks = Object.entries(languages).map(([code, label]) => ({
         toggle();
       });
 
-      // Set flag when clicking a language link
+      // Set flag when clicking a language link and save to localStorage
       const langLinks = dropdown.querySelectorAll('a');
       langLinks.forEach(link => {
         link.addEventListener('click', () => {
           sessionStorage.setItem('isLanguageChange', 'true');
+          // Save selected language to localStorage for persistence
+          const targetLang = link.getAttribute('href')?.split('/')[1] || 'es';
+          localStorage.setItem('preferred-lang', targetLang);
         });
       });
     });

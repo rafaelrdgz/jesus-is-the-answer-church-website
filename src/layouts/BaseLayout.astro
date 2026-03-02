@@ -49,6 +49,50 @@ const enUrl = new URL(getAlternateUrl(Astro.url, 'en'), Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <script is:inline>
+      // Check for saved language preference and redirect if needed
+      (function() {
+        const savedLang = localStorage.getItem('preferred-lang');
+        const currentPath = window.location.pathname;
+        const pathParts = currentPath.split('/').filter(Boolean);
+        
+        // Get current lang from URL (default is 'es')
+        const urlLang = pathParts[0] === 'en' ? 'en' : 'es';
+        
+        // If there's a saved preference and it differs from current URL, redirect
+        if (savedLang && savedLang !== urlLang) {
+          // Only redirect if not already in a redirect loop
+          if (!sessionStorage.getItem('langRedirectDone')) {
+            sessionStorage.setItem('langRedirectDone', 'true');
+            // Build new path with saved language
+            let newPath = currentPath;
+            if (savedLang === 'en') {
+              // Add /en/ prefix if going to English
+              if (urlLang === 'es') {
+                // Remove existing lang prefix and add 'en'
+                const restPath = pathParts.slice(1).join('/');
+                newPath = '/en/' + (restPath || '');
+              }
+            } else {
+              // Going to Spanish - remove /en/ prefix if present
+              if (urlLang === 'en') {
+                const restPath = pathParts.slice(1).join('/');
+                newPath = '/' + (restPath || '');
+              }
+            }
+            // Preserve query string and hash
+            const queryString = window.location.search;
+            const hash = window.location.hash;
+            window.location.href = newPath + queryString + hash;
+          }
+        }
+        // Clear the redirect flag after page loads
+        if (sessionStorage.getItem('langRedirectDone')) {
+          sessionStorage.removeItem('langRedirectDone');
+        }
+      })();
+    </script>
+    
     <Seo
       title={resolvedTitle}
       description={resolvedDescription}
