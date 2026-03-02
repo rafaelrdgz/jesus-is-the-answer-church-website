@@ -119,17 +119,6 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: true}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Article Content / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Full blog post content / Contenido del artículo"}
-
-  # Site Info - Información del sitio
-  - name: "siteInfo"
-    label: "Site Info / Info del Sitio"
-    folder: "src/content/siteInfo"
-    create: true
-    slug: "{{slug}}"
-    i18n: true
-    fields:
-      - {label: "Title / Título", name: "title", widget: "string", i18n: true, hint: "For identifying the content block / Para identificar el bloque"}
-      - {label: "Body / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Content details / Detalles del contenido"}
 `;
 
   return new Response(config, {
