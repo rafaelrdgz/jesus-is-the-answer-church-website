@@ -1,14 +1,39 @@
 import { defineCollection, z } from 'astro:content';
 
+// Helper: converts empty strings from Decap CMS to undefined so
+// that Zod's .optional() treats them as missing values.
+const emptyToUndefined = (val: unknown) =>
+  typeof val === 'string' && val.trim() === '' ? undefined : val;
+
+// Optional string that gracefully handles empty strings from the CMS
+const optionalString = () =>
+  z.preprocess(emptyToUndefined, z.string().optional());
+
+// Optional URL that handles empty strings from the CMS
+const optionalUrl = () =>
+  z.preprocess(emptyToUndefined, z.string().url().optional());
+
+// Optional email that handles empty strings from the CMS
+const optionalEmail = () =>
+  z.preprocess(emptyToUndefined, z.string().email().optional());
+
+// Optional image path (no strict prefix validation — the CMS widget
+// already controls the upload folder via its `folder` property)
+const optionalImage = () =>
+  z.preprocess(emptyToUndefined, z.string().optional());
+
+// Required image path (allows any non-empty path)
+const requiredImage = () => z.string().min(1);
+
 const staffCollection = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
     title: z.string(),
-    image: z.string().startsWith('/uploads/staff/'),
-    email: z.string().email().optional(),
-    phone: z.string().optional(),
-    bio: z.string().optional(),
+    image: z.preprocess(emptyToUndefined, requiredImage().optional()),
+    email: optionalEmail(),
+    phone: optionalString(),
+    bio: optionalString(),
     order: z.number().default(0),
     draft: z.boolean().default(false),
   }),
@@ -20,12 +45,12 @@ const eventsCollection = defineCollection({
     title: z.string(),
     date: z.date(),
     endDate: z.date().optional(),
-    time: z.string().optional(),
+    time: optionalString(),
     location: z.string(),
-    image: z.string().startsWith('/uploads/events/'),
-    summary: z.string().optional(),
+    image: z.preprocess(emptyToUndefined, requiredImage().optional()),
+    summary: optionalString(),
     tags: z.array(z.string()).optional(),
-    registrationLink: z.string().url().optional(),
+    registrationLink: optionalUrl(),
     registrationRequired: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
@@ -35,15 +60,15 @@ const sermonsCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    slug: z.string().optional(),
+    slug: optionalString(),
     date: z.date(),
     speaker: z.string(),
-    series: z.string().optional(),
-    scripture: z.string().optional(),
-    audioUrl: z.string().url().optional(),
-    videoUrl: z.string().url().optional(),
-    image: z.string().startsWith('/uploads/sermons/').optional(),
-    summary: z.string().optional(),
+    series: optionalString(),
+    scripture: optionalString(),
+    audioUrl: optionalUrl(),
+    videoUrl: optionalUrl(),
+    image: optionalImage(),
+    summary: optionalString(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false),
   }),
@@ -53,11 +78,11 @@ const ministriesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    logo: z.string().startsWith('/uploads/ministries/').optional(),
+    logo: optionalImage(),
     summary: z.string(),
-    coordinator: z.string().optional(),
-    contact: z.string().optional(),
-    schedule: z.string().optional(),
+    coordinator: optionalString(),
+    contact: optionalString(),
+    schedule: optionalString(),
     order: z.number().optional(),
     draft: z.boolean().default(false),
   }),
@@ -67,12 +92,12 @@ const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    slug: z.string().optional(),
+    slug: optionalString(),
     pubDate: z.date(),
     description: z.string(),
     author: z.string().default('Church Staff'),
     image: z.object({
-      url: z.string().startsWith('/uploads/blog/'),
+      url: z.string(),
       alt: z.string()
     }).optional(),
     tags: z.array(z.string()).default(["general"]),
