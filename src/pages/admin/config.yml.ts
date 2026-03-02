@@ -17,222 +17,126 @@ slug:
   encoding: "unicode"
   clean_accents: true
 
+i18n:
+  structure: multiple_folders
+  locales: [en, es]
+  default_locale: en
+
 collections:
-  # Staff - Miembros del personal (Español)
-  - name: "staff_es"
-    label: "Staff (Español)"
-    folder: "src/content/staff/es"
+  # Staff - Miembros del personal
+  - name: "staff"
+    label: "Staff / Personal"
+    folder: "src/content/staff"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Name", name: "name", widget: "string", isName: true}
-      - {label: "Title", name: "title", widget: "string", hint: "e.g., Pastor Principal, Diácono"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/staff", required: false}
-      - {label: "Email", name: "email", widget: "string", required: false}
-      - {label: "Phone", name: "phone", widget: "string", required: false}
-      - {label: "Bio", name: "bio", widget: "text", required: false}
-      - {label: "Order", name: "order", widget: "number", default: 0}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Biografía extendida y detalles"}
+      - {label: "Name / Nombre", name: "name", widget: "string", i18n: true}
+      - {label: "Title / Cargo", name: "title", widget: "string", i18n: true, hint: "e.g., Senior Pastor / Pastor Principal"}
+      - {label: "Image", name: "image", widget: "image", folder: "/uploads/staff", required: false, i18n: duplicate}
+      - {label: "Email", name: "email", widget: "string", required: false, i18n: duplicate}
+      - {label: "Phone", name: "phone", widget: "string", required: false, i18n: duplicate}
+      - {label: "Bio", name: "bio", widget: "text", required: false, i18n: true}
+      - {label: "Order", name: "order", widget: "number", default: 0, i18n: duplicate}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Extended bio / Biografía extendida"}
 
-  # Staff - Miembros del personal (English)
-  - name: "staff_en"
-    label: "Staff (English)"
-    folder: "src/content/staff/en"
+  # Events - Eventos
+  - name: "events"
+    label: "Events / Eventos"
+    folder: "src/content/events"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Name", name: "name", widget: "string", isName: true}
-      - {label: "Title", name: "title", widget: "string", hint: "e.g., Senior Pastor, Deaconess"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/staff", required: false}
-      - {label: "Email", name: "email", widget: "string", required: false}
-      - {label: "Phone", name: "phone", widget: "string", required: false}
-      - {label: "Bio", name: "bio", widget: "text", required: false}
-      - {label: "Order", name: "order", widget: "number", default: 0}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Extended bio and details"}
+      - {label: "Title / Título", name: "title", widget: "string", i18n: true}
+      - {label: "Date / Fecha", name: "date", widget: "datetime", i18n: duplicate}
+      - {label: "End Date / Fecha fin", name: "endDate", widget: "datetime", required: false, i18n: duplicate}
+      - {label: "Time / Hora", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false, i18n: true}
+      - {label: "Location / Lugar", name: "location", widget: "string", i18n: true}
+      - {label: "Image", name: "image", widget: "image", folder: "/uploads/events", i18n: duplicate}
+      - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: duplicate}
+      - {label: "Registration Link", name: "registrationLink", widget: "string", required: false, i18n: duplicate}
+      - {label: "Registration Required", name: "registrationRequired", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Full event details / Detalles del evento"}
 
-  # Events - Eventos (Español)
-  - name: "events_es"
-    label: "Events (Español)"
-    folder: "src/content/events/es"
+  # Sermons - Predicas
+  - name: "sermons"
+    label: "Sermons / Predicas"
+    folder: "src/content/sermons"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "End Date", name: "endDate", widget: "datetime", required: false}
-      - {label: "Time", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/events"}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Registration Link", name: "registrationLink", widget: "string", required: false}
-      - {label: "Registration Required", name: "registrationRequired", widget: "boolean", default: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Detalles completos del evento"}
+      - {label: "Title / Título", name: "title", widget: "string", i18n: true}
+      - {label: "Slug", name: "slug", widget: "string", required: false, i18n: duplicate, hint: "URL-friendly identifier"}
+      - {label: "Date / Fecha", name: "date", widget: "datetime", i18n: duplicate}
+      - {label: "Speaker / Predicador", name: "speaker", widget: "string", i18n: true}
+      - {label: "Series / Serie", name: "series", widget: "string", required: false, i18n: true}
+      - {label: "Scripture / Escritura", name: "scripture", widget: "string", required: false, i18n: true}
+      - {label: "Audio URL", name: "audioUrl", widget: "string", required: false, i18n: duplicate}
+      - {label: "Video URL", name: "videoUrl", widget: "string", required: false, i18n: duplicate}
+      - {label: "Image", name: "image", widget: "image", folder: "/uploads/sermons", required: false, i18n: duplicate}
+      - {label: "Summary / Resumen", name: "summary", widget: "text", required: false, i18n: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: duplicate}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Full sermon notes / Notas de la prédica"}
 
-  # Events - Eventos (English)
-  - name: "events_en"
-    label: "Events (English)"
-    folder: "src/content/events/en"
+  # Ministries - Ministerios
+  - name: "ministries"
+    label: "Ministries / Ministerios"
+    folder: "src/content/ministries"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "End Date", name: "endDate", widget: "datetime", required: false}
-      - {label: "Time", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/events"}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Registration Link", name: "registrationLink", widget: "string", required: false}
-      - {label: "Registration Required", name: "registrationRequired", widget: "boolean", default: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Full event details and description"}
+      - {label: "Name / Nombre", name: "name", widget: "string", i18n: true}
+      - {label: "Logo", name: "logo", widget: "image", folder: "/uploads/ministries", required: false, i18n: duplicate}
+      - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
+      - {label: "Coordinator / Coordinador", name: "coordinator", widget: "string", required: false, i18n: duplicate}
+      - {label: "Contact / Contacto", name: "contact", widget: "string", required: false, i18n: duplicate, hint: "Email or phone / Email o teléfono"}
+      - {label: "Schedule / Horario", name: "schedule", widget: "string", required: false, i18n: true}
+      - {label: "Order", name: "order", widget: "number", required: false, i18n: duplicate}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Full description / Descripción completa"}
 
-  # Sermons - Predicas (Español)
-  - name: "sermons_es"
-    label: "Sermons (Español)"
-    folder: "src/content/sermons/es"
+  # Blog
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Slug", name: "slug", widget: "string", required: false, hint: "Identificador URL"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Speaker", name: "speaker", widget: "string"}
-      - {label: "Series", name: "series", widget: "string", required: false}
-      - {label: "Scripture", name: "scripture", widget: "string", required: false}
-      - {label: "Audio URL", name: "audioUrl", widget: "string", required: false}
-      - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/sermons", required: false}
-      - {label: "Summary", name: "summary", widget: "text", required: false}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Contenido de la Predica", name: "body", widget: "markdown", required: false, hint: "Notas completas de la prédica"}
-
-  # Sermons - Predicas (English)
-  - name: "sermons_en"
-    label: "Sermons (English)"
-    folder: "src/content/sermons/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Slug", name: "slug", widget: "string", required: false, hint: "URL-friendly identifier"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Speaker", name: "speaker", widget: "string"}
-      - {label: "Series", name: "series", widget: "string", required: false}
-      - {label: "Scripture", name: "scripture", widget: "string", required: false}
-      - {label: "Audio URL", name: "audioUrl", widget: "string", required: false}
-      - {label: "Video URL", name: "videoUrl", widget: "string", required: false}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/sermons", required: false}
-      - {label: "Summary", name: "summary", widget: "text", required: false}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Sermon Overview", name: "body", widget: "markdown", required: false, hint: "Full sermon notes: overview, key points, discussion questions"}
-
-  # Ministries - Ministerios (Español)
-  - name: "ministries_es"
-    label: "Ministries (Español)"
-    folder: "src/content/ministries/es"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Name", name: "name", widget: "string", isName: true}
-      - {label: "Logo", name: "logo", widget: "image", folder: "/uploads/ministries", required: false}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Coordinator", name: "coordinator", widget: "string", required: false}
-      - {label: "Contact", name: "contact", widget: "string", hint: "Email o teléfono", required: false}
-      - {label: "Schedule", name: "schedule", widget: "string", required: false}
-      - {label: "Order", name: "order", widget: "number", required: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Descripción completa del ministerio"}
-
-  # Ministries - Ministerios (English)
-  - name: "ministries_en"
-    label: "Ministries (English)"
-    folder: "src/content/ministries/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Name", name: "name", widget: "string", isName: true}
-      - {label: "Logo", name: "logo", widget: "image", folder: "/uploads/ministries", required: false}
-      - {label: "Summary", name: "summary", widget: "text"}
-      - {label: "Coordinator", name: "coordinator", widget: "string", required: false}
-      - {label: "Contact", name: "contact", widget: "string", hint: "Email or phone", required: false}
-      - {label: "Schedule", name: "schedule", widget: "string", required: false}
-      - {label: "Order", name: "order", widget: "number", required: false}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Body", name: "body", widget: "markdown", required: false, hint: "Full ministry description, programs, volunteer info"}
-
-  # Blog - Blog (Español)
-  - name: "blog_es"
-    label: "Blog (Español)"
-    folder: "src/content/blog/es"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Slug", name: "slug", widget: "string", required: false, hint: "Identificador URL"}
-      - {label: "Publish Date", name: "pubDate", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text", hint: "Descripción corta para previews"}
-      - {label: "Author", name: "author", widget: "string", default: "Personal de la Iglesia"}
+      - {label: "Title / Título", name: "title", widget: "string", i18n: true}
+      - {label: "Slug", name: "slug", widget: "string", required: false, i18n: duplicate, hint: "URL-friendly identifier"}
+      - {label: "Publish Date / Fecha", name: "pubDate", widget: "datetime", i18n: duplicate}
+      - {label: "Description / Descripción", name: "description", widget: "text", i18n: true, hint: "Short description for previews / Descripción corta"}
+      - {label: "Author / Autor", name: "author", widget: "string", default: "Church Staff", i18n: true}
       - label: "Image"
         name: "image"
         widget: "object"
         required: false
+        i18n: duplicate
         fields:
           - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog"}
-          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe la imagen para accesibilidad"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["general"]}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Article Content", name: "body", widget: "markdown", hint: "Contenido completo del artículo"}
+          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image / Describe la imagen"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: duplicate}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+      - {label: "Article Content / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Full blog post content / Contenido del artículo"}
 
-  # Blog - Blog (English)
-  - name: "blog_en"
-    label: "Blog (English)"
-    folder: "src/content/blog/en"
+  # Site Info - Información del sitio
+  - name: "siteInfo"
+    label: "Site Info / Info del Sitio"
+    folder: "src/content/siteInfo"
     create: true
     slug: "{{slug}}"
+    i18n: true
     fields:
-      - {label: "Title", name: "title", widget: "string", isName: true}
-      - {label: "Slug", name: "slug", widget: "string", required: false, hint: "URL-friendly identifier"}
-      - {label: "Publish Date", name: "pubDate", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text", hint: "Short description for previews"}
-      - {label: "Author", name: "author", widget: "string", default: "Church Staff"}
-      - label: "Image"
-        name: "image"
-        widget: "object"
-        required: false
-        fields:
-          - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog"}
-          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image for accessibility"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["general"]}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false}
-      - {label: "Article Content", name: "body", widget: "markdown", hint: "Full blog post content"}
-
-  # Site Info - Información del sitio (Español)
-  - name: "siteInfo_es"
-    label: "Site Info (Español)"
-    folder: "src/content/siteInfo/es"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string", hint: "Para identificar el bloque de contenido", isName: true}
-      - {label: "Body", name: "body", widget: "markdown", hint: "Detalles del contenido (horarios, fechas, etc.)"}
-
-  # Site Info - Información del sitio (English)
-  - name: "siteInfo_en"
-    label: "Site Info (English)"
-    folder: "src/content/siteInfo/en"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Title", name: "title", widget: "string", hint: "For identifying the content block", isName: true}
-      - {label: "Body", name: "body", widget: "markdown", hint: "Content details (hours, schedules, etc.)"}
+      - {label: "Title / Título", name: "title", widget: "string", i18n: true, hint: "For identifying the content block / Para identificar el bloque"}
+      - {label: "Body / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Content details / Detalles del contenido"}
 `;
 
   return new Response(config, {
