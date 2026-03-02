@@ -115,7 +115,14 @@ collections:
       - {label: "Publish Date / Fecha", name: "pubDate", widget: "datetime", i18n: duplicate}
       - {label: "Description / Descripción", name: "description", widget: "text", i18n: true, hint: "Short description for previews / Descripción corta"}
       - {label: "Author / Autor", name: "author", widget: "string", default: "Church Staff", i18n: true}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/blog", required: false, i18n: duplicate}
+      - label: "Image"
+        name: "image"
+        widget: "object"
+        required: false
+        i18n: true
+        fields:
+          - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog", i18n: duplicate}
+          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image", i18n: duplicate}
       - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: true}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Article Content / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Full blog post content / Contenido del artículo"}
