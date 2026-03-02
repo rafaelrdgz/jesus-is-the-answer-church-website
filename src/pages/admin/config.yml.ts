@@ -56,7 +56,7 @@ collections:
       - {label: "Location / Lugar", name: "location", widget: "string", i18n: true}
       - {label: "Image", name: "image", widget: "image", folder: "/uploads/events", i18n: duplicate}
       - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
-      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: duplicate}
+      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: true}
       - {label: "Registration Link", name: "registrationLink", widget: "string", required: false, i18n: duplicate}
       - {label: "Registration Required", name: "registrationRequired", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
@@ -80,7 +80,7 @@ collections:
       - {label: "Video URL", name: "videoUrl", widget: "string", required: false, i18n: duplicate}
       - {label: "Image", name: "image", widget: "image", folder: "/uploads/sermons", required: false, i18n: duplicate}
       - {label: "Summary / Resumen", name: "summary", widget: "text", required: false, i18n: true}
-      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: duplicate}
+      - {label: "Tags", name: "tags", widget: "list", required: false, i18n: true}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Full sermon notes / Notas de la prédica"}
 
@@ -119,11 +119,11 @@ collections:
         name: "image"
         widget: "object"
         required: false
-        i18n: duplicate
+        i18n: true
         fields:
           - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog"}
           - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image / Describe la imagen"}
-      - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: duplicate}
+      - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: true}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Article Content / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Full blog post content / Contenido del artículo"}
 
