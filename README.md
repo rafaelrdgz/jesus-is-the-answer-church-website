@@ -1,11 +1,10 @@
-# maucariapacom-church-starter [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+# Jesus is the answer church website
 
-An open-source starter template for building high-performance, content-driven church websites with Astro. Pure SSG, SEO-ready, built with Tailwind CSS, Markdown content, ready to integrate with any CMS
+Church website built with Astro. Static Site Generation (SSG), SEO optimized, styled with Tailwind CSS, Markdown content, ready to integrate with any CMS.
 
-## Demo and Screenshot
-![Home Page](https://imgs.maucariapa.com/uploads/452546054-84337aa6-eea8-4879-9461-d2e7d3665aee.png)
+## Demo
 
-Demo URL: [https://maucariapacom-church-starter.pages.dev](https://maucariapacom-church-starter.pages.dev/)
+Demo URL: [https://jesuseslarespuesta.vercel.app/](https://jesuseslarespuesta.vercel.app/)
 
 ## Features
 
@@ -23,7 +22,7 @@ Demo URL: [https://maucariapacom-church-starter.pages.dev](https://maucariapacom
 ## Project Structure
 
 ```
-maucariapacom-church-starter/
+jesuseslarespuesta-church-web/
 ├── public/
 │   ├── uploads/          # Images directories (staff, events, sermons, etc.)
 │   │   ├── staff/        # Staff profile images
@@ -67,18 +66,18 @@ maucariapacom-church-starter/
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/MauCariApa-com/maucariapacom-church-starter.git
-   cd maucariapacom-church-starter
+   git clone https://github.com/your-repo/jesuseslarespuesta-church-web.git
+   cd jesuseslarespuesta-church-web
    ```
 
 2. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 
 3. Start the development server:
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 4. Open your browser and navigate to `http://localhost:4321`
@@ -274,41 +273,3 @@ This site can be deployed to any static hosting platform:
    ```
 
 3. Run `npm run deploy`
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Bugs / Issues
-
-We appreciate your understanding and encourage you to report any new bugs you find by
-[opening an issue](https://github.com/MauCariApa-com/maucariapacom-church-starter/issues)
-on our GitHub repository.
-
-## Acknowledgments
-
-- [Astro](https://astro.build) for the awesome static site generator
-- [Tailwind CSS](https://tailwindcss.com) for the utility-first CSS framework
-- [Heroicons](https://heroicons.com) for the icon system
-- [Pexels](https://pexels.com) & [Unsplash](https://unsplash.com) for stock photography
-
-## Support
-
-For questions, issues, or contributions, please visit our GitHub repository or contact the development team.
-
-## Donate
-
-Love our work? 
-
-[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/kodester/)
-
----
-
-Created with ❤️ for church communities worldwide

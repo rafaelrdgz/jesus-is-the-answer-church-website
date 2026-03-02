@@ -37,9 +37,9 @@ export const routes: Record<string, Record<string, string>> = {
 export const ui = {
   es: {
     // ==================== GLOBAL / LAYOUT ====================
-    'site.title': 'Church Name - Una Comunidad Cristiana Acogedora',
+    'site.title': 'Jesús es la respuesta',
     'site.description': 'Somos una comunidad cristiana acogedora dedicada a compartir el amor de Dios a través de la adoración, la comunión y el servicio.',
-    'site.imageAlt': 'Church Name',
+    'site.imageAlt': 'Jesús es la respuesta',
 
     // ==================== NAVIGATION ====================
     'nav.home': 'Inicio',
@@ -55,7 +55,7 @@ export const ui = {
     'nav.viewOnGithub': 'Ver en GitHub',
 
     // ==================== FOOTER ====================
-    'footer.churchName': 'Church Name',
+    'footer.churchName': 'Jesús es la respuesta',
     'footer.address1': '123 Main Street',
     'footer.address2': 'Anytown, ST 12345',
     'footer.phone': '(555) 123-4567',
@@ -67,7 +67,7 @@ export const ui = {
     'footer.saturdayHours': '9:00 AM - 1:00 PM',
     'footer.sunday': 'Domingo:',
     'footer.sundayHours': 'Cerrado (excepto servicios)',
-    'footer.copyright': 'Church Name. Todos los derechos reservados.',
+    'footer.copyright': 'Jesús es la respuesta. Todos los derechos reservados.',
     'footer.privacyPolicy': 'Política de Privacidad',
     'footer.termsOfService': 'Términos de Servicio',
     'footer.groupAbout': 'Acerca de',
@@ -552,9 +552,9 @@ export const ui = {
 
   en: {
     // ==================== GLOBAL / LAYOUT ====================
-    'site.title': 'Church Name - A Welcoming Christian Community',
+    'site.title': 'Jesus is the answer',
     'site.description': 'We are a welcoming Christian community dedicated to sharing God\'s love through worship, fellowship, and service.',
-    'site.imageAlt': 'Church Name',
+    'site.imageAlt': 'Jesus is the answer',
 
     // ==================== NAVIGATION ====================
     'nav.home': 'Home',
@@ -570,7 +570,7 @@ export const ui = {
     'nav.viewOnGithub': 'View on GitHub',
 
     // ==================== FOOTER ====================
-    'footer.churchName': 'Church Name',
+    'footer.churchName': 'Jesus is the answer',
     'footer.address1': '123 Main Street',
     'footer.address2': 'Anytown, ST 12345',
     'footer.phone': '(555) 123-4567',
@@ -582,7 +582,7 @@ export const ui = {
     'footer.saturdayHours': '9:00 AM - 1:00 PM',
     'footer.sunday': 'Sunday:',
     'footer.sundayHours': 'Closed (except services)',
-    'footer.copyright': 'Church Name. All rights reserved.',
+    'footer.copyright': 'Jesus is the answer. All rights reserved.',
     'footer.privacyPolicy': 'Privacy Policy',
     'footer.termsOfService': 'Terms of Service',
     'footer.groupAbout': 'About',
