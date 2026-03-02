@@ -1,5 +1,8 @@
 ---
 import Button from "../UI/Button.astro";
+import type { Lang } from "../../i18n/ui";
+import { defaultLang } from "../../i18n/ui";
+import { useTranslations, useTranslatedPath } from "../../i18n/utils";
 
 export interface Props {
   title?: string;
@@ -9,16 +12,21 @@ export interface Props {
   ctaLink?: string;
   secondaryCtaText?: string;
   secondaryCtaLink?: string;
+  lang?: Lang;
 }
 
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 const {
-  title = "Welcome to Our Church",
-  subtitle = "A place of worship, community, and spiritual growth",
-  backgroundImage = "/uploads/hero-bg.jpg",
-  ctaText = "Plan Your Visit",
-  ctaLink = "/im-new",
-  secondaryCtaText = "Watch Sermons",
-  secondaryCtaLink = "/sermons",
+  title = t('hero.title'),
+  subtitle = t('hero.subtitle'),
+  backgroundImage = "/uploads/hero-bg.webp",
+  ctaText = t('hero.cta'),
+  ctaLink = translatePath('/soy-nuevo'),
+  secondaryCtaText = t('hero.secondaryCta'),
+  secondaryCtaLink = translatePath('/sermones'),
 } = Astro.props;
 ---
 

@@ -1,0 +1,135 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PostLayout from "../../../layouts/PostLayout.astro";
+import Button from "../../../components/UI/Button.astro";
+import { getCollection } from "astro:content";
+import { formatDate } from "../../../utils/dateUtils";
+import { useTranslations, useTranslatedPath, filterByLocale, getSlugFromId, localizedField } from "../../../i18n/utils";
+import type { Lang } from "../../../i18n/ui";
+
+export async function getStaticPaths() {
+  const eventEntries = await getCollection("events", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  const paths = [];
+  
+  for (const entry of filterByLocale(eventEntries, 'es')) {
+    paths.push({
+      params: { lang: 'es', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'es' as Lang },
+    });
+  }
+  for (const entry of filterByLocale(eventEntries, 'en')) {
+    paths.push({
+      params: { lang: 'en', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'en' as Lang },
+    });
+  }
+  
+  return paths;
+}
+
+const { entry, lang } = Astro.props;
+const langParams = lang as Lang;
+
+const t = useTranslations(langParams);
+const translatePath = useTranslatedPath(langParams);
+const { Content } = await entry.render();
+
+const localizedTitle = localizedField(entry.data.title, langParams);
+const localizedSummary = localizedField(entry.data.summary, langParams);
+const localizedLocation = localizedField(entry.data.location, langParams);
+const formattedDate = formatDate(entry.data.date, langParams);
+const formattedEndDate = entry.data.endDate ? formatDate(entry.data.endDate, langParams) : null;
+const isFutureEvent = new Date(entry.data.date) > new Date();
+---
+
+<BaseLayout
+  lang={langParams}
+  title={`${localizedTitle} - Events - Church Name`}
+  description={localizedSummary}
+  image={{ url: entry.data.image, alt: localizedTitle }}
+  type="article"
+>
+  <PostLayout
+    title={localizedTitle}
+    description={localizedSummary}
+    image={{ url: entry.data.image, alt: localizedTitle }}
+    date={entry.data.date}
+    tags={entry.data.tags}
+    type="event"
+    lang={langParams}
+  >
+    <div class="bg-gray-50 rounded-lg p-6 mb-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg font-bold mb-2">{t('eventDetail.dateTime')}</h3>
+          <div class="flex items-start mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <div>
+              {formattedEndDate && formattedEndDate !== formattedDate ? (
+                <p>{formattedDate} - {formattedEndDate}</p>
+              ) : (
+                <p>{formattedDate}</p>
+              )}
+              {entry.data.time && <p>{entry.data.time}</p>}
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-bold mb-2">{t('eventDetail.location')}</h3>
+          <div class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <p>{localizedLocation}</p>
+          </div>
+        </div>
+      </div>
+      
+      {isFutureEvent && entry.data.registrationRequired && (
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <h3 class="text-lg font-bold mb-3">{t('eventDetail.registration')}</h3>
+          <p class="mb-4">{t('eventDetail.registrationRequired')}</p>
+          
+          {entry.data.registrationLink ? (
+            <Button href={entry.data.registrationLink} target="_blank" variant="primary">
+              {t('eventDetail.registerNow')}
+            </Button>
+          ) : (
+            <Button href={translatePath('/contacto')} variant="primary">
+              {t('eventDetail.contactToRegister')}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+    
+    <article class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700">
+      <Content />
+    </article>
+    
+    <div class="mt-12 flex flex-wrap gap-4">
+      {isFutureEvent && entry.data.registrationLink && (
+        <Button href={entry.data.registrationLink} target="_blank" variant="primary">
+          {t('eventDetail.registerBtn')}
+        </Button>
+      )}
+      
+      <Button href={translatePath('/eventos')} variant="outline">
+        {t('eventDetail.backToAll')}
+      </Button>
+      
+      <Button href={translatePath('/contacto')} variant="outline">
+        {t('eventDetail.questions')}
+      </Button>
+    </div>
+  </PostLayout>
+</BaseLayout>

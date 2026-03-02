@@ -1,14 +1,30 @@
 import { defineCollection, z } from 'astro:content';
 
+const localizedString = (defaultValue: string = '') => z.union([
+  z.object({
+    es: z.string().default(defaultValue),
+    en: z.string().default(defaultValue),
+  }),
+  z.string().transform(val => ({ es: val, en: val }))
+]);
+
+const optionalLocalizedString = () => z.union([
+  z.object({
+    es: z.string().optional(),
+    en: z.string().optional(),
+  }),
+  z.string().transform(val => ({ es: val, en: val }))
+]);
+
 const staffCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    name: z.string(),
-    title: z.string(), // e.g., "Senior Pastor", "Deaconess"
+    name: localizedString(),
+    title: localizedString(),
     image: z.string().startsWith('/uploads/staff/'),
     email: z.string().email().optional(),
     phone: z.string().optional(),
-    bio: z.string().optional(), // Short bio in frontmatter
+    bio: optionalLocalizedString(),
     order: z.number().default(0),
     draft: z.boolean().default(false),
   }),
@@ -17,13 +33,13 @@ const staffCollection = defineCollection({
 const eventsCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string(),
-    date: z.date(), // Event start date
-    endDate: z.date().optional(), // Event end date
-    time: z.string().optional(), // e.g., "09:00 AM - 11:00 AM"
-    location: z.string(),
+    title: localizedString(),
+    date: z.date(),
+    endDate: z.date().optional(),
+    time: z.string().optional(),
+    location: localizedString(),
     image: z.string().startsWith('/uploads/events/'),
-    summary: z.string(),
+    summary: optionalLocalizedString(),
     tags: z.array(z.string()).optional(),
     registrationLink: z.string().url().optional(),
     registrationRequired: z.boolean().default(false),
@@ -34,16 +50,16 @@ const eventsCollection = defineCollection({
 const sermonsCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string(),
-    slug: z.string().optional(), // Auto-generated if not provided
+    title: localizedString(),
+    slug: z.string().optional(),
     date: z.date(),
-    speaker: z.string(),
-    series: z.string().optional(),
-    scripture: z.string().optional(),
+    speaker: localizedString(),
+    series: optionalLocalizedString(),
+    scripture: optionalLocalizedString(),
     audioUrl: z.string().url().optional(),
     videoUrl: z.string().url().optional(),
-    image: z.string().startsWith('/uploads/sermons/').optional(), // Thumbnail
-    summary: z.string().optional(),
+    image: z.string().startsWith('/uploads/sermons/').optional(),
+    summary: optionalLocalizedString(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false),
   }),
@@ -52,12 +68,12 @@ const sermonsCollection = defineCollection({
 const ministriesCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    name: z.string(),
+    name: localizedString(),
     logo: z.string().startsWith('/uploads/ministries/').optional(),
-    summary: z.string(),
-    coordinator: z.string().optional(),
-    contact: z.string().optional(), // Email or text
-    schedule: z.string().optional(),
+    summary: localizedString(),
+    coordinator: optionalLocalizedString(),
+    contact: optionalLocalizedString(),
+    schedule: optionalLocalizedString(),
     order: z.number().optional(),
     draft: z.boolean().default(false),
   }),
@@ -66,14 +82,20 @@ const ministriesCollection = defineCollection({
 const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string(),
+    title: localizedString(),
     slug: z.string().optional(),
     pubDate: z.date(),
-    description: z.string(), // Short description for previews
-    author: z.string().default("Church Staff"),
+    description: localizedString(),
+    author: localizedString('Church Staff'),
     image: z.object({
       url: z.string().startsWith('/uploads/blog/'),
-      alt: z.string()
+      alt: z.union([
+        z.object({
+          es: z.string(),
+          en: z.string(),
+        }),
+        z.string().transform(val => ({ es: val, en: val }))
+      ])
     }).optional(),
     tags: z.array(z.string()).default(["general"]),
     draft: z.boolean().default(false),
@@ -81,9 +103,9 @@ const blogCollection = defineCollection({
 });
 
 const siteInfoCollection = defineCollection({
-  type: 'content', // Could be 'data' if only frontmatter is needed
+  type: 'content',
   schema: z.object({
-    title: z.string(), // For identifying the content block
+    title: localizedString(),
   }),
 });
 

@@ -1,4 +1,7 @@
 ---
+import type { Lang } from "../../i18n/ui";
+import { defaultLang } from "../../i18n/ui";
+
 export interface Props {
   title: string;
   description: string;
@@ -8,6 +11,7 @@ export interface Props {
   };
   type?: "website" | "article";
   canonicalUrl?: string;
+  lang?: Lang;
 }
 
 const {
@@ -19,12 +23,17 @@ const {
   },
   type = "website",
   canonicalUrl,
+  lang = defaultLang,
 } = Astro.props;
 
 // Get the canonical URL
 const canonicalURL = canonicalUrl || new URL(Astro.url.pathname, Astro.site);
 
-// Get Church address and contact info (would come from site config in a real implementation)
+// OG locale mapping
+const ogLocale = lang === 'es' ? 'es_ES' : 'en_US';
+const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
+
+// Get Church address and contact info
 const churchInfo = {
   name: "Church Name",
   address: {
@@ -38,6 +47,47 @@ const churchInfo = {
   email: "info@churchname.org",
   url: Astro.site?.toString() || "https://example.com",
 };
+
+// Build JSON-LD as proper objects (fixes template literal bug in <script> blocks)
+const churchJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Church",
+  "name": churchInfo.name,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": churchInfo.address.streetAddress,
+    "addressLocality": churchInfo.address.addressLocality,
+    "addressRegion": churchInfo.address.addressRegion,
+    "postalCode": churchInfo.address.postalCode,
+    "addressCountry": churchInfo.address.addressCountry,
+  },
+  "telephone": churchInfo.telephone,
+  "email": churchInfo.email,
+  "url": churchInfo.url,
+  "inLanguage": lang,
+});
+
+const articleJsonLd = type === "article" ? JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "image": new URL(image.url, Astro.site).toString(),
+  "description": description,
+  "inLanguage": lang,
+  "publisher": {
+    "@type": "Organization",
+    "name": churchInfo.name,
+    "logo": {
+      "@type": "ImageObject",
+      "url": new URL("/uploads/logo.png", Astro.site).toString(),
+    },
+  },
+  "url": canonicalURL.toString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalURL.toString(),
+  },
+}) : null;
 ---
 
 <!-- Basic SEO -->
@@ -52,6 +102,8 @@ const churchInfo = {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image.url, Astro.site)} />
 <meta property="og:image:alt" content={image.alt} />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={ogLocaleAlternate} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -62,48 +114,8 @@ const churchInfo = {
 <meta property="twitter:image:alt" content={image.alt} />
 
 <!-- JSON-LD Schema for Church -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Church",
-    "name": "${churchInfo.name}",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "${churchInfo.address.streetAddress}",
-      "addressLocality": "${churchInfo.address.addressLocality}",
-      "addressRegion": "${churchInfo.address.addressRegion}",
-      "postalCode": "${churchInfo.address.postalCode}",
-      "addressCountry": "${churchInfo.address.addressCountry}"
-    },
-    "telephone": "${churchInfo.telephone}",
-    "email": "${churchInfo.email}",
-    "url": "${churchInfo.url}"
-  }
-</script>
+<script type="application/ld+json" set:html={churchJsonLd} />
 
-{
-  type === "article" && (
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "${title}",
-        "image": "${new URL(image.url, Astro.site)}",
-        "description": "${description}",
-        "publisher": {
-          "@type": "Organization",
-          "name": "${churchInfo.name}",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "${new URL("/uploads/logo.png", Astro.site)}"
-          }
-        },
-        "url": "${canonicalURL}",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "${canonicalURL}"
-        }
-      }
-    </script>
-  )
-}
+{articleJsonLd && (
+  <script type="application/ld+json" set:html={articleJsonLd} />
+)}

@@ -1,0 +1,122 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHeader from "../../../components/Sections/PageHeader.astro";
+import Button from "../../../components/UI/Button.astro";
+import { getCollection } from "astro:content";
+import { useTranslations, useTranslatedPath, filterByLocale, getSlugFromId, localizedField } from "../../../i18n/utils";
+import type { Lang } from "../../../i18n/ui";
+
+export async function getStaticPaths() {
+  const ministryEntries = await getCollection("ministries", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  const paths = [];
+  
+  for (const entry of filterByLocale(ministryEntries, 'es')) {
+    paths.push({
+      params: { lang: 'es', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'es' as Lang },
+    });
+  }
+  for (const entry of filterByLocale(ministryEntries, 'en')) {
+    paths.push({
+      params: { lang: 'en', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'en' as Lang },
+    });
+  }
+  
+  return paths;
+}
+
+const { entry, lang } = Astro.props;
+const langParams = lang as Lang;
+
+const t = useTranslations(langParams);
+const translatePath = useTranslatedPath(langParams);
+const { Content } = await entry.render();
+
+const localizedName = localizedField(entry.data.name, langParams);
+const localizedSummary = localizedField(entry.data.summary, langParams);
+const localizedCoordinator = localizedField(entry.data.coordinator, langParams);
+const localizedContact = localizedField(entry.data.contact, langParams);
+const localizedSchedule = localizedField(entry.data.schedule, langParams);
+---
+
+<BaseLayout
+  lang={langParams}
+  title={`${localizedName} - Church Name`}
+  description={localizedSummary}
+  image={entry.data.logo ? { url: entry.data.logo, alt: localizedName } : undefined}
+>
+  <PageHeader 
+    title={`${localizedName}${t('ministryDetail.suffix')}`}
+    backgroundImage="/uploads/ministry-detail-bg.webp"
+    lang={langParams}
+  />
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900">
+            <Content />
+          </div>
+        </div>
+        
+        <div>
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm sticky top-24">
+            {entry.data.logo && (
+              <div class="mb-6 flex justify-center">
+                <img src={entry.data.logo} alt={localizedName} class="max-h-48 w-auto" />
+              </div>
+            )}
+            
+            <h3 class="text-xl font-bold mb-4">{t('ministryDetail.infoHeading')}</h3>
+            
+            <div class="space-y-4 mb-6">
+              {localizedCoordinator && (
+                <div>
+                  <h4 class="font-bold text-gray-700">{t('ministryDetail.coordinatorLabel')}</h4>
+                  <p>{localizedCoordinator}</p>
+                </div>
+              )}
+              
+              {localizedContact && (
+                <div>
+                  <h4 class="font-bold text-gray-700">{t('ministryDetail.contactLabel')}</h4>
+                  {localizedContact.includes('@') ? (
+                    <a href={`mailto:${localizedContact}`} class="text-primary-600 hover:text-primary-700">
+                      {localizedContact}
+                    </a>
+                  ) : (
+                    <p>{localizedContact}</p>
+                  )}
+                </div>
+              )}
+              
+              {localizedSchedule && (
+                <div>
+                  <h4 class="font-bold text-gray-700">{t('ministryDetail.scheduleLabel')}</h4>
+                  <p>{localizedSchedule}</p>
+                </div>
+              )}
+            </div>
+            
+            <div class="flex flex-col space-y-3">
+              <Button href={translatePath('/contacto')} variant="primary">
+                {t('ministryDetail.getInvolved')}
+              </Button>
+              
+              <Button href={translatePath('/ministerios')} variant="outline">
+                {t('ministryDetail.backToAll')}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

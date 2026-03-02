@@ -3,6 +3,9 @@ import "../assets/styles/global.css";
 import Seo from "../components/UI/Seo.astro";
 import Header from "../components/Global/Header.astro";
 import Footer from "../components/Global/Footer.astro";
+import type { Lang } from "../i18n/ui";
+import { defaultLang } from "../i18n/ui";
+import { useTranslations, getAlternateUrl } from "../i18n/utils";
 
 export interface Props {
   title?: string;
@@ -13,11 +16,13 @@ export interface Props {
   };
   type?: "website" | "article";
   canonicalUrl?: string;
+  lang?: Lang;
 }
 
 const {
-  title = "Church Name - A Welcoming Christian Community",
-  description = "We are a welcoming Christian community dedicated to sharing God's love through worship, fellowship, and service.",
+  lang = defaultLang,
+  title,
+  description,
   image = {
     url: "/uploads/church-default.webp",
     alt: "Church Name",
@@ -25,10 +30,19 @@ const {
   type = "website",
   canonicalUrl,
 } = Astro.props;
+
+const t = useTranslations(lang);
+
+const resolvedTitle = title ?? t('site.title');
+const resolvedDescription = description ?? t('site.description');
+
+// Build alternate URLs for hreflang tags
+const esUrl = new URL(getAlternateUrl(Astro.url, 'es'), Astro.site);
+const enUrl = new URL(getAlternateUrl(Astro.url, 'en'), Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,12 +50,18 @@ const {
     <meta name="generator" content={Astro.generator} />
     
     <Seo
-      title={title}
-      description={description}
+      title={resolvedTitle}
+      description={resolvedDescription}
       image={image}
       type={type}
       canonicalUrl={canonicalUrl}
+      lang={lang}
     />
+    
+    <!-- hreflang alternate links -->
+    <link rel="alternate" hreflang="es" href={esUrl.toString()} />
+    <link rel="alternate" hreflang="en" href={enUrl.toString()} />
+    <link rel="alternate" hreflang="x-default" href={esUrl.toString()} />
     
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -51,13 +71,29 @@ const {
   </head>
   <body>
     <div class="flex flex-col min-h-screen">
-      <Header />
+      <Header lang={lang} />
       
       <main class="flex-grow">
         <slot />
       </main>
       
-      <Footer />
+      <Footer lang={lang} />
     </div>
+
+    <script>
+      // Save scroll position before page unload
+      window.addEventListener('beforeunload', () => {
+        sessionStorage.setItem('scrollPosition', String(window.scrollY));
+      });
+
+      // Restore scroll position on page load
+      window.addEventListener('load', () => {
+        const savedPosition = sessionStorage.getItem('scrollPosition');
+        if (savedPosition) {
+          window.scrollTo(0, parseInt(savedPosition, 10));
+          sessionStorage.removeItem('scrollPosition');
+        }
+      });
+    </script>
   </body>
 </html>

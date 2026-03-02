@@ -1,0 +1,129 @@
+---
+import { languages, type Lang } from '../../i18n/ui';
+import { useTranslations, getAlternateUrl } from '../../i18n/utils';
+
+export interface Props {
+  lang: Lang;
+  variant?: 'desktop' | 'mobile';
+}
+
+const { lang, variant = 'desktop' } = Astro.props;
+const t = useTranslations(lang);
+
+// Create unique IDs based on variant
+const btnId = variant === 'mobile' ? 'lang-picker-btn-mobile' : 'lang-picker-btn';
+const dropdownId = variant === 'mobile' ? 'lang-picker-dropdown-mobile' : 'lang-picker-dropdown';
+
+// Build links for each language
+const languageLinks = Object.entries(languages).map(([code, label]) => ({
+  code: code as Lang,
+  label,
+  href: getAlternateUrl(Astro.url, code as Lang),
+  isCurrent: code === lang,
+}));
+---
+
+<div class="language-picker relative">
+  <button
+    id={btnId}
+    type="button"
+    class="lang-picker-btn flex items-center gap-1.5 text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors px-2 py-1.5 rounded-md hover:bg-gray-50 min-h-[44px] min-w-[44px]"
+    data-variant={variant}
+    aria-label={t('lang.switchTo')}
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <!-- Globe icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+    </svg>
+    <span class="hidden sm:inline">{t('lang.current')}</span>
+    <!-- Chevron -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    id={dropdownId}
+    class="lang-picker-dropdown absolute right-0 top-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 py-1 min-w-[140px] opacity-0 invisible transition-all duration-150 z-[60]"
+    role="menu"
+  >
+    {languageLinks.map((link) => (
+      <a
+        href={link.href}
+        class={`flex items-center gap-2 px-4 py-2 text-sm transition-colors ${
+          link.isCurrent
+            ? 'text-primary-600 bg-primary-50 font-medium'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
+        }`}
+        role="menuitem"
+        aria-current={link.isCurrent ? 'true' : undefined}
+      >
+        {link.isCurrent && (
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        )}
+        <span class={link.isCurrent ? '' : 'ml-5.5'}>{link.label}</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .lang-picker-dropdown.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .lang-picker-btn[aria-expanded="true"] svg:last-child {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  function initLanguagePickers() {
+    const pickers = document.querySelectorAll('.language-picker');
+    
+    pickers.forEach(picker => {
+      const btn = picker.querySelector('.lang-picker-btn');
+      const dropdown = picker.querySelector('.lang-picker-dropdown');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+
+      if (!btn || !dropdown) return;
+      
+      // Skip if already initialized
+      if (btn.hasAttribute('data-initialized')) return;
+      btn.setAttribute('data-initialized', 'true');
+
+      const toggle = () => {
+        const isOpen = dropdown.classList.toggle('show');
+        btn.setAttribute('aria-expanded', String(isOpen));
+        
+        // Close mobile menu when opening language picker
+        if (isOpen && mobileMenu && mobileMenu.classList.contains('show')) {
+          mobileMenu.classList.remove('show');
+          if (mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
+        }
+      };
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggle();
+      });
+    });
+  }
+
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguagePickers);
+  } else {
+    initLanguagePickers();
+  }
+  
+  // Also initialize after view transitions or dynamic content loads
+  document.addEventListener('astro:page-load', initLanguagePickers);
+</script>

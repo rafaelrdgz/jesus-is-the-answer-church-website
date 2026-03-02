@@ -1,0 +1,286 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/Sections/PageHeader.astro";
+import StaffList from "../../components/Sections/StaffList.astro";
+import Button from "../../components/UI/Button.astro";
+import { useTranslations, useTranslatedPath } from "../../i18n/utils";
+
+const { lang } = Astro.params;
+const langParams = lang || 'es';
+
+const t = useTranslations(langParams as any);
+const translatePath = useTranslatedPath(langParams as any);
+---
+
+<BaseLayout
+  lang={langParams as any}
+  title={t('about.title')}
+  description={t('about.description')}
+>
+  <PageHeader 
+    title={t('about.heading')} 
+    subtitle={t('about.subtitle')}
+    backgroundImage="https://images.unsplash.com/photo-1438032005730-c779502df39b?w=1920&h=600&fit=crop&crop=center"
+    lang={langParams as any}
+  />
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('about.missionHeading')}</h2>
+          <p class="text-xl text-gray-700 mb-8">
+            {t('about.missionText')}
+          </p>
+          
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('about.visionHeading')}</h2>
+          <p class="text-xl text-gray-700 mb-8">
+            {t('about.visionText')}
+          </p>
+        </div>
+        
+        <div>
+          <img 
+            src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop&crop=center" 
+            alt={t('about.worshipAlt')} 
+            class="rounded-lg shadow-lg object-cover w-full h-full"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('about.valuesHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('about.valuesSubtitle')}
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value1Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value1Desc')}
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-secondary-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value2Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value2Desc')}
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-accent-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value3Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value3Desc')}
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value4Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value4Desc')}
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value5Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value5Desc')}
+          </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('about.value6Title')}</h3>
+          <p class="text-gray-700">
+            {t('about.value6Desc')}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('about.historyHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('about.historySubtitle')}
+        </p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="relative pl-8 sm:pl-16 py-6 group">
+          <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-7 before:h-full before:px-px before:bg-gray-300 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-7 after:w-4 after:h-4 after:bg-primary-600 after:border-4 after:border-white after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
+            <time class="sm:w-28 text-xs text-gray-500 uppercase">{t('about.history1Year')}</time>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900">{t('about.history1Title')}</h3>
+              <p class="text-gray-700">
+                {t('about.history1Text')}
+              </p>
+            </div>
+          </div>
+          
+          <div class="relative pl-8 sm:pl-16 py-6 group">
+            <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-7 before:h-full before:px-px before:bg-gray-300 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-7 after:w-4 after:h-4 after:bg-primary-600 after:border-4 after:border-white after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
+              <time class="sm:w-28 text-xs text-gray-500 uppercase">{t('about.history2Year')}</time>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">{t('about.history2Title')}</h3>
+                <p class="text-gray-700">
+                  {t('about.history2Text')}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative pl-8 sm:pl-16 py-6 group">
+            <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-7 before:h-full before:px-px before:bg-gray-300 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-7 after:w-4 after:h-4 after:bg-primary-600 after:border-4 after:border-white after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
+              <time class="sm:w-28 text-xs text-gray-500 uppercase">{t('about.history3Year')}</time>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">{t('about.history3Title')}</h3>
+                <p class="text-gray-700">
+                  {t('about.history3Text')}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative pl-8 sm:pl-16 py-6 group">
+            <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-7 before:h-full before:px-px before:bg-gray-300 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-7 after:w-4 after:h-4 after:bg-primary-600 after:border-4 after:border-white after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
+              <time class="sm:w-28 text-xs text-gray-500 uppercase">{t('about.history4Year')}</time>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">{t('about.history4Title')}</h3>
+                <p class="text-gray-700">
+                  {t('about.history4Text')}
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative pl-8 sm:pl-16 py-6 group">
+            <div class="flex flex-col sm:flex-row items-start mb-1 group-last:before:hidden before:absolute before:left-2 sm:before:left-7 before:h-full before:px-px before:bg-gray-300 before:self-start before:-translate-x-1/2 before:translate-y-3 after:absolute after:left-2 sm:after:left-7 after:w-4 after:h-4 after:bg-primary-600 after:border-4 after:border-white after:rounded-full after:-translate-x-1/2 after:translate-y-1.5">
+              <time class="sm:w-28 text-xs text-gray-500 uppercase">{t('about.history5Year')}</time>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">{t('about.history5Title')}</h3>
+                <p class="text-gray-700">
+                  {t('about.history5Text')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('about.leadershipHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('about.leadershipSubtitle')}
+        </p>
+      </div>
+      
+      <StaffList showAll={false} limit={3} lang={langParams as any} />
+      
+      <div class="mt-12 text-center">
+        <Button href={translatePath('/personal')} variant="primary">
+          {t('about.meetAllStaff')}
+        </Button>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('about.beliefHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('about.beliefSubtitle')}
+        </p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto prose prose-lg">
+        <h3>{t('about.belief1Title')}</h3>
+        <p>
+          {t('about.belief1Text')}
+        </p>
+        
+        <h3>{t('about.belief2Title')}</h3>
+        <p>
+          {t('about.belief2Text')}
+        </p>
+        
+        <h3>{t('about.belief3Title')}</h3>
+        <p>
+          {t('about.belief3Text')}
+        </p>
+        
+        <h3>{t('about.belief4Title')}</h3>
+        <p>
+          {t('about.belief4Text')}
+        </p>
+        
+        <h3>{t('about.belief5Title')}</h3>
+        <p>
+          {t('about.belief5Text')}
+        </p>
+        
+        <h3>{t('about.belief6Title')}</h3>
+        <p>
+          {t('about.belief6Text')}
+        </p>
+        
+        <h3>{t('about.belief7Title')}</h3>
+        <p>
+          {t('about.belief7Text')}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

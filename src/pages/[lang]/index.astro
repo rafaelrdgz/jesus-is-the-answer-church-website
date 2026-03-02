@@ -1,0 +1,183 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroSection from "../../components/Sections/HeroSection.astro";
+import EventList from "../../components/Sections/EventList.astro";
+import SermonList from "../../components/Sections/SermonList.astro";
+import Button from "../../components/UI/Button.astro";
+import { getLangFromUrl, useTranslations, useTranslatedPath } from "../../i18n/utils";
+
+const { lang } = Astro.params;
+const langParams = lang || 'es';
+
+const t = useTranslations(langParams as any);
+const translatePath = useTranslatedPath(langParams as any);
+---
+
+<BaseLayout lang={langParams as any}>
+  <HeroSection 
+    title={t('hero.title')}
+    subtitle={t('hero.subtitle')}
+    backgroundImage="/uploads/hero-bg.webp"
+    ctaText={t('hero.cta')}
+    ctaLink={translatePath('/soy-nuevo')}
+    secondaryCtaText={t('hero.secondaryCta')}
+    secondaryCtaLink={translatePath('/sermones')}
+  />
+  
+  <section class="py-16 bg-white">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('home.joinUs')}</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">{t('home.morningService')}</h3>
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('home.morningTime')}</p>
+            <p class="text-gray-600 mb-4">{t('home.morningDesc')}</p>
+            <p class="italic text-gray-500">{t('home.morningNote')}</p>
+          </div>
+          
+          <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
+            <h3 class="text-xl font-bold mb-3">{t('home.familyService')}</h3>
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('home.familyTime')}</p>
+            <p class="text-gray-600 mb-4">{t('home.familyDesc')}</p>
+            <p class="italic text-gray-500">{t('home.familyNote')}</p>
+          </div>
+        </div>
+        
+        <Button href={translatePath('/soy-nuevo')} variant="outline">
+          {t('home.planVisit')}
+        </Button>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img 
+            src="/uploads/church-default.webp" 
+            alt={t('home.churchImageAlt')} 
+            class="rounded-lg shadow-lg object-cover w-full h-full"
+          />
+        </div>
+        
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('home.aboutHeading')}</h2>
+          <p class="text-gray-700 mb-6 text-lg">
+            {t('home.aboutP1')}
+          </p>
+          <p class="text-gray-700 mb-8 text-lg">
+            {t('home.aboutP2')}
+          </p>
+          
+          <Button href={translatePath('/nosotros')}>
+            {t('home.aboutCta')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <EventList lang={langParams as any} />
+  
+  <SermonList lang={langParams as any} />
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('home.ministriesHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('home.ministriesSubtitle')}
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('home.childrensMinistry')}</h3>
+          <p class="text-gray-700 mb-4">
+            {t('home.childrensDesc')}
+          </p>
+          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+            {t('home.learnMore')}
+          </a>
+        </div>
+        
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-secondary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('home.worshipMinistry')}</h3>
+          <p class="text-gray-700 mb-4">
+            {t('home.worshipDesc')}
+          </p>
+          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+            {t('home.learnMore')}
+          </a>
+        </div>
+        
+        <div class="card text-center p-8">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-accent-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('home.outreachMinistry')}</h3>
+          <p class="text-gray-700 mb-4">
+            {t('home.outreachDesc')}
+          </p>
+          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+            {t('home.learnMore')}
+          </a>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <Button href={translatePath('/ministerios')} variant="outline">
+          {t('home.viewAllMinistries')}
+        </Button>
+      </div>
+    </div>
+  </section>
+  
+  <section 
+    class="py-20 bg-cover bg-center text-white"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
+  >
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">{t('home.ctaHeading')}</h2>
+        <p class="text-xl mb-8">
+          {t('home.ctaText')}
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href={translatePath('/soy-nuevo')} variant="primary" size="lg">
+            {t('home.ctaNew')}
+          </Button>
+          
+          <Button href={translatePath('/contacto')} variant="outline" size="lg" class="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
+            {t('home.ctaContact')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

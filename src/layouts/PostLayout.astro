@@ -3,6 +3,9 @@ export const layout = "../layouts/BaseLayout.astro";
 
 import PageHeader from "../components/Sections/PageHeader.astro";
 import { formatDate } from "../utils/dateUtils";
+import type { Lang } from "../i18n/ui";
+import { defaultLang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
 
 export interface Props {
   title: string;
@@ -15,6 +18,7 @@ export interface Props {
   author?: string;
   tags?: string[];
   type?: "sermon" | "event" | "blog" | "ministry";
+  lang?: Lang;
 }
 
 const {
@@ -25,25 +29,27 @@ const {
   author,
   tags = [],
   type = "blog",
+  lang = defaultLang,
 } = Astro.props;
 
+const t = useTranslations(lang);
 const seoType = "article";
 
 let pageTitle = title;
 if (type === "sermon") {
-  pageTitle = `Sermon: ${title}`;
+  pageTitle = `${t('postLayout.sermonPrefix')}${title}`;
 } else if (type === "event") {
-  pageTitle = `Event: ${title}`;
+  pageTitle = `${t('postLayout.eventPrefix')}${title}`;
 } else if (type === "ministry") {
-  pageTitle = `${title} Ministry`;
+  pageTitle = `${title}${t('postLayout.ministrySuffix')}`;
 }
 
-const formattedDate = date ? formatDate(date) : null;
+const formattedDate = date ? formatDate(date, lang) : null;
 ---
 
-<!-- SEO props diteruskan oleh BaseLayout -->
-<!-- Header & Footer hanya dipanggil sekali oleh BaseLayout -->
-<PageHeader title={title} />
+<!-- SEO props are passed by BaseLayout -->
+<!-- Header & Footer are only called once by BaseLayout -->
+<PageHeader title={title} lang={lang} />
 
 <main class="container py-8">
   <div class="mx-auto max-w-3xl">

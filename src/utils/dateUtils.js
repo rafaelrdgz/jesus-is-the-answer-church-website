@@ -1,18 +1,31 @@
 import { format, parseISO } from "date-fns";
+import { es } from "date-fns/locale/es";
+import { enUS } from "date-fns/locale/en-US";
+
+/** Map language codes to date-fns locales */
+const localeMap = {
+  es: es,
+  en: enUS,
+};
 
 /**
- * Format a date in a human-readable format
+ * Format a date in a human-readable format, locale-aware.
  * @param {Date|string} date The date to format
- * @param {string} formatStr The format string (default: 'MMMM d, yyyy')
+ * @param {string} [lang='es'] Language code ('es' or 'en')
+ * @param {string} [formatStr] The format string (default varies by lang)
  * @returns {string} The formatted date
  */
-export function formatDate(date, formatStr = "MMMM d, yyyy") {
+export function formatDate(date, lang = "es", formatStr) {
   if (!date) return "";
   
   // If date is a string, parse it
   const dateObj = typeof date === "string" ? parseISO(date) : date;
   
-  return format(dateObj, formatStr);
+  // Default format per language
+  const defaultFormat = lang === "es" ? "d 'de' MMMM, yyyy" : "MMMM d, yyyy";
+  const fmt = formatStr || defaultFormat;
+  
+  return format(dateObj, fmt, { locale: localeMap[lang] || localeMap.es });
 }
 
 /**

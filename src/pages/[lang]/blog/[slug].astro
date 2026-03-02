@@ -1,0 +1,68 @@
+---
+export const prerender = true;
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PostLayout from "../../../layouts/PostLayout.astro";
+import { getCollection } from "astro:content";
+import { useTranslations, filterByLocale, getSlugFromId, localizedField } from "../../../i18n/utils";
+import type { Lang } from "../../../i18n/ui";
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog", ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  const paths = [];
+  
+  for (const entry of filterByLocale(blogEntries, 'es')) {
+    paths.push({
+      params: { lang: 'es', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'es' as Lang },
+    });
+  }
+  for (const entry of filterByLocale(blogEntries, 'en')) {
+    paths.push({
+      params: { lang: 'en', slug: getSlugFromId(entry.id) },
+      props: { entry, lang: 'en' as Lang },
+    });
+  }
+  
+  return paths;
+}
+
+const { entry, lang } = Astro.props;
+const langParams = lang as Lang;
+
+const t = useTranslations(langParams);
+const { Content } = await entry.render();
+
+const localizedTitle = localizedField(entry.data.title, langParams);
+const localizedDescription = localizedField(entry.data.description, langParams);
+const localizedAuthor = localizedField(entry.data.author, langParams);
+
+const localizedImage = entry.data.image ? {
+  url: entry.data.image.url,
+  alt: localizedField(entry.data.image.alt, langParams)
+} : undefined;
+---
+
+<BaseLayout
+  lang={langParams}
+  title={`${localizedTitle} - Blog - Church Name`}
+  description={localizedDescription}
+  image={localizedImage}
+  type="article"
+>
+  <PostLayout
+    title={localizedTitle}
+    description={localizedDescription}
+    image={localizedImage}
+    date={entry.data.pubDate}
+    author={localizedAuthor}
+    tags={entry.data.tags}
+    type="blog"
+    lang={langParams}
+  >
+    <Content />
+  </PostLayout>
+</BaseLayout>

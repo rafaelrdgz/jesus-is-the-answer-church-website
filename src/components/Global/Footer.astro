@@ -1,43 +1,56 @@
 ---
 import { getCollection } from "astro:content";
+import type { Lang } from "../../i18n/ui";
+import { defaultLang } from "../../i18n/ui";
+import { useTranslations, useTranslatedPath } from "../../i18n/utils";
+
+export interface Props {
+  lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 // Get the office hours from the siteInfo collection
 let officeHours;
 try {
   const siteInfoEntries = await getCollection("siteInfo");
-  officeHours = siteInfoEntries.find(entry => entry.id === "office-hours");
+  // Try locale-specific first, then fall back
+  officeHours = siteInfoEntries.find(entry => entry.id === `${lang}/office-hours`) 
+    ?? siteInfoEntries.find(entry => entry.id === "office-hours");
 } catch (error) {
   // Collection might not exist yet when first setting up the project
   console.log("Office hours not found or collections not yet available");
 }
 
-// Footer navigation groups
+// Footer navigation groups — all translated
 const footerNavs = [
   {
-    title: "About",
+    title: t('footer.groupAbout'),
     items: [
-      { text: "About Us", href: "/about-us" },
-      { text: "I'm New", href: "/im-new" },
-      { text: "Staff", href: "/staff" },
-      { text: "Contact", href: "/contact" },
+      { text: t('footer.aboutUs'), href: translatePath('/nosotros') },
+      { text: t('footer.imNew'), href: translatePath('/soy-nuevo') },
+      { text: t('footer.staff'), href: translatePath('/personal') },
+      { text: t('footer.contact'), href: translatePath('/contacto') },
     ],
   },
   {
-    title: "Resources",
+    title: t('footer.groupResources'),
     items: [
-      { text: "Sermons", href: "/sermons" },
-      { text: "Events", href: "/events" },
-      { text: "Blog", href: "/blog" },
-      { text: "Ministries", href: "/ministries" },
+      { text: t('footer.sermons'), href: translatePath('/sermones') },
+      { text: t('footer.events'), href: translatePath('/eventos') },
+      { text: t('footer.blog'), href: translatePath('/blog') },
+      { text: t('footer.ministries'), href: translatePath('/ministerios') },
     ],
   },
   {
-    title: "Connect",
+    title: t('footer.groupConnect'),
     items: [
-      { text: "Giving", href: "/giving" },
-      { text: "Prayer Request", href: "/contact#prayer" },
-      { text: "Newsletter", href: "/contact#newsletter" },
-      { text: "Volunteer", href: "/im-new#volunteer" },
+      { text: t('footer.giving'), href: translatePath('/ofrenda') },
+      { text: t('footer.prayerRequest'), href: `${translatePath('/contacto')}#prayer` },
+      { text: t('footer.newsletter'), href: `${translatePath('/contacto')}#newsletter` },
+      { text: t('footer.volunteer'), href: `${translatePath('/soy-nuevo')}#volunteer` },
     ],
   },
 ];
@@ -76,6 +89,8 @@ if (officeHours) {
   const { Content } = await officeHours.render();
   OfficeHoursContent = Content;
 }
+
+const homePath = translatePath('/');
 ---
 
 <footer class="bg-gray-900 text-white pt-16 pb-8">
@@ -84,33 +99,33 @@ if (officeHours) {
       <!-- Church Info -->
       <div>
         <div class="mb-4">
-          <a href="/" class="text-2xl font-bold text-white font-serif inline-flex items-center">
-            <span class="sr-only">Church Name</span>
+          <a href={homePath} class="text-2xl font-bold text-white font-serif inline-flex items-center">
+            <span class="sr-only">{t('footer.churchName')}</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="h-12 w-auto text-white mr-2">
               <path fill="currentColor" d="M344 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 24-32 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l32 0 0 46.4L183.3 210c-14.5 8.7-23.3 24.3-23.3 41.2L160 512l96 0 0-96c0-35.3 28.7-64 64-64s64 28.7 64 64l0 96 96 0 0-260.8c0-16.9-8.8-32.5-23.3-41.2L344 142.4 344 96l32 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-32 0 0-24zM24.9 330.3C9.5 338.8 0 354.9 0 372.4L0 464c0 26.5 21.5 48 48 48l80 0 0-238.4L24.9 330.3zM592 512c26.5 0 48-21.5 48-48l0-91.6c0-17.5-9.5-33.6-24.9-42.1L512 273.6 512 512l80 0z"/>
             </svg>
-            <span>Church Name</span>
+            <span>{t('footer.churchName')}</span>
           </a>
         </div>
         
         <address class="not-italic mb-4 text-gray-300">
-          <p>123 Main Street</p>
-          <p>Anytown, ST 12345</p>
+          <p>{t('footer.address1')}</p>
+          <p>{t('footer.address2')}</p>
           <p class="mt-2">
             <a href="tel:+15551234567" class="hover:text-primary-300">
-              (555) 123-4567
+              {t('footer.phone')}
             </a>
           </p>
           <p>
             <a href="mailto:info@churchname.org" class="hover:text-primary-300">
-              info@churchname.org
+              {t('footer.email')}
             </a>
           </p>
         </address>
         
         <!-- Office Hours -->
         <div class="mt-4 text-gray-300">
-          <h4 class="text-sm font-bold mb-2 text-white">Office Hours</h4>
+          <h4 class="text-sm font-bold mb-2 text-white">{t('footer.officeHours')}</h4>
           {
             OfficeHoursContent ? (
               <div class="text-sm prose prose-sm prose-invert max-w-none [&_h3]:text-white [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mb-2 [&_ul]:list-none [&_ul]:p-0 [&_li]:mb-1 [&_strong]:text-white">
@@ -118,9 +133,9 @@ if (officeHours) {
               </div>
             ) : (
               <div class="text-sm">
-                <p><strong class="text-white">Mon-Fri:</strong> 9:00 AM - 5:00 PM</p>
-                <p><strong class="text-white">Saturday:</strong> 9:00 AM - 1:00 PM</p>
-                <p><strong class="text-white">Sunday:</strong> Closed (except services)</p>
+                <p><strong class="text-white">{t('footer.monFri')}</strong> {t('footer.monFriHours')}</p>
+                <p><strong class="text-white">{t('footer.saturday')}</strong> {t('footer.saturdayHours')}</p>
+                <p><strong class="text-white">{t('footer.sunday')}</strong> {t('footer.sundayHours')}</p>
               </div>
             )
           }
@@ -168,10 +183,10 @@ if (officeHours) {
     
     <!-- Copyright -->
     <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-      <p>&copy; {currentYear} Church Name. All rights reserved.</p>
+      <p>&copy; {currentYear} {t('footer.copyright')}</p>
       <p class="mt-2">
-        <a href="/privacy-policy" class="hover:text-primary-300 mr-4">Privacy Policy</a>
-        <a href="/terms-of-service" class="hover:text-primary-300">Terms of Service</a>
+        <a href={translatePath('/politica-de-privacidad')} class="hover:text-primary-300 mr-4">{t('footer.privacyPolicy')}</a>
+        <a href={translatePath('/terminos-de-servicio')} class="hover:text-primary-300">{t('footer.termsOfService')}</a>
       </p>
     </div>
   </div>

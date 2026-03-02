@@ -1,0 +1,106 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHeader from "../../../components/Sections/PageHeader.astro";
+import Button from "../../../components/UI/Button.astro";
+import { getCollection } from "astro:content";
+import { useTranslations, useTranslatedPath, filterByLocale, getSlugFromId, localizedField } from "../../../i18n/utils";
+import type { Lang } from "../../../i18n/ui";
+
+const { lang } = Astro.params;
+const langParams = (lang || 'es') as Lang;
+
+const t = useTranslations(langParams);
+const translatePath = useTranslatedPath(langParams);
+
+const all = await getCollection("ministries", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+);
+
+const ministries = filterByLocale(all, langParams).sort((a, b) =>
+  (a.data.order ?? 0) - (b.data.order ?? 0) ||
+  localizedField(a.data.name, langParams).localeCompare(localizedField(b.data.name, langParams))
+);
+---
+
+<BaseLayout lang={langParams} title={t('ministries.title')} description={t('ministries.description')}>
+  <PageHeader 
+    title={t('ministries.heading')} 
+    subtitle={t('ministries.subtitle')}
+    backgroundImage="/uploads/ministries-header-bg.webp"
+    lang={langParams}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('ministries.connectHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('ministries.connectSubtitle')}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {ministries.map(m => (
+          <a
+            href={`${translatePath('/ministerios')}/${getSlugFromId(m.id)}`}
+            class="bg-white rounded-lg shadow flex flex-col overflow-hidden hover:shadow-lg transition min-h-[370px]"
+          >
+            {m.data.logo && (
+              <div class="w-full h-[200px] overflow-hidden">
+                <img src={m.data.logo} alt={localizedField(m.data.name, langParams)} class="w-full h-full object-cover" />
+              </div>
+            )}
+
+            <div class="p-4 flex flex-col flex-1 justify-between">
+              <div>
+                <h3 class="text-xl font-semibold mb-2">{localizedField(m.data.name, langParams)}</h3>
+                <p class="text-gray-700">{localizedField(m.data.summary, langParams)}</p>
+              </div>
+              {(localizedField(m.data.coordinator, langParams) || localizedField(m.data.schedule, langParams)) && (
+                <div class="mt-4 space-y-1 text-sm text-gray-600">
+                  {localizedField(m.data.coordinator, langParams) && (
+                    <div class="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      {t('ministries.coordinatorPrefix')}{localizedField(m.data.coordinator, langParams)}
+                    </div>
+                  )}
+                  {localizedField(m.data.schedule, langParams) && (
+                    <div class="flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 align-text-top" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {localizedField(m.data.schedule, langParams)}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-cover bg-center text-white" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(/uploads/volunteer-bg.webp)">
+    <div class="container mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">{t('ministries.ctaHeading')}</h2>
+        <p class="text-xl mb-8">{t('ministries.ctaText')}</p>
+        <Button href={translatePath('/contacto')} variant="primary">
+          {t('ministries.startVolunteering')}
+        </Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

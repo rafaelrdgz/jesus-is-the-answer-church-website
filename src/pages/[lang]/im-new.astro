@@ -1,0 +1,293 @@
+---
+export const prerender = true;
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'es' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHeader from "../../components/Sections/PageHeader.astro";
+import Button from "../../components/UI/Button.astro";
+import { useTranslations, useTranslatedPath } from "../../i18n/utils";
+
+const { lang } = Astro.params;
+const langParams = lang || 'es';
+
+const t = useTranslations(langParams as any);
+const translatePath = useTranslatedPath(langParams as any);
+---
+
+<BaseLayout
+  lang={langParams as any}
+  title={t('new.title')}
+  description={t('new.description')}
+>
+  <PageHeader 
+    title={t('new.heading')} 
+    subtitle={t('new.subtitle')}
+    backgroundImage="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&h=600&fit=crop&crop=center"
+    lang={langParams as any}
+  />
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('new.expectHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('new.expectSubtitle')}
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('new.serviceLength')}</h3>
+          <p class="text-gray-700">{t('new.serviceLengthText')}</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('new.worshipStyle')}</h3>
+          <p class="text-gray-700">{t('new.worshipStyleText')}</p>
+        </div>
+        
+        <div class="text-center p-6">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-3">{t('new.teachingStyle')}</h3>
+          <p class="text-gray-700">{t('new.teachingStyleText')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&h=600&fit=crop&crop=center" alt="Casual church attire" class="rounded-lg shadow-lg object-cover w-full h-full">
+        </div>
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('new.attireHeading')}</h2>
+          <p class="text-gray-700 mb-6 text-lg">{t('new.attireP1')}</p>
+          <p class="text-gray-700 mb-6 text-lg">{t('new.attireP2')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('new.serviceTimesHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('new.serviceTimesSubtitle')}
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h3 class="text-xl font-bold mb-3">{t('new.sundayMorning')}</h3>
+          <div class="mb-4">
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('new.sundayTime1')}</p>
+            <p class="text-gray-600">{t('new.sundayService1')}</p>
+            <p class="italic text-gray-500 mt-2">In-person & Livestream</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('new.sundayTime2')}</p>
+            <p class="text-gray-600">{t('new.sundayService2')}</p>
+            <p class="italic text-gray-500 mt-2">In-person only</p>
+          </div>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-sm">
+          <h3 class="text-xl font-bold mb-3">{t('new.wednesdayEvening')}</h3>
+          <div class="mb-4">
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('new.wedTime1')}</p>
+            <p class="text-gray-600">{t('new.wedService1')}</p>
+            <p class="italic text-gray-500 mt-2">In-person & Livestream</p>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-primary-600 mb-2">{t('new.wedTime2')}</p>
+            <p class="text-gray-600">{t('new.wedService2')}</p>
+            <p class="italic text-gray-500 mt-2">In-person only</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('new.kidsHeading')}</h2>
+          <p class="text-gray-700 mb-6 text-lg">{t('new.kidsSubtitle')}</p>
+          <ul class="space-y-4 mb-6">
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700"><strong>{t('new.nurseryLabel')}</strong> {t('new.nurseryText')}</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700"><strong>{t('new.preschoolLabel')}</strong> {t('new.preschoolText')}</span>
+            </li>
+            <li class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700"><strong>{t('new.elementaryLabel')}</strong> {t('new.elementaryText')}</span>
+            </li>
+          </ul>
+          <p class="text-gray-700 mb-6 text-lg">{t('new.kidsSafety')}</p>
+          <Button href={translatePath('/ministerios')} variant="primary">
+            {t('new.learnMoreKids')}
+          </Button>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&h=600&fit=crop&crop=center" alt="Children at our church" class="rounded-lg shadow-lg object-cover w-full h-full">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('new.locationHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('new.locationSubtitle')}
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
+            <div class="w-full h-full flex items-center justify-center bg-gray-300">
+              <p class="text-gray-600 text-center p-4">
+                {t('new.mapPlaceholder')}<br>
+                <span class="text-sm">({t('new.mapNote')})</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="bg-white p-8 rounded-lg shadow-sm h-full">
+            <h3 class="text-xl font-bold mb-4">{t('new.churchAddress')}</h3>
+            <address class="not-italic mb-6 text-gray-700">
+              <p class="text-lg">{t('footer.address1')}</p>
+              <p class="text-lg">{t('footer.address2')}</p>
+            </address>
+            <h4 class="text-lg font-bold mb-2">{t('new.parkingHeading')}</h4>
+            <p class="text-gray-700 mb-6">{t('new.parkingText')}</p>
+            <h4 class="text-lg font-bold mb-2">{t('new.transitHeading')}</h4>
+            <p class="text-gray-700 mb-6">{t('new.transitText')}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="py-16 bg-gray-50">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('new.faqHeading')}</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          {t('new.faqSubtitle')}
+        </p>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <div class="space-y-4">
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">{t('new.faq1Q')}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">{t('new.faq1A')}</p>
+          </details>
+          
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">{t('new.faq2Q')}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">{t('new.faq2A')}</p>
+          </details>
+          
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">{t('new.faq3Q')}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">{t('new.faq3A')}</p>
+          </details>
+          
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">{t('new.faq4Q')}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">{t('new.faq4A')}</p>
+          </details>
+          
+          <details class="group bg-white p-6 rounded-lg shadow-sm">
+            <summary class="flex justify-between items-center cursor-pointer">
+              <h3 class="text-xl font-bold">{t('new.faq5Q')}</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform duration-200 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+            </summary>
+            <p class="mt-4 text-gray-700">{t('new.faq5A')}</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section 
+    class="py-20 bg-cover bg-center text-white"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/visit-us.webp)"
+  >
+    <div class="container">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">{t('new.ctaHeading')}</h2>
+        <p class="text-xl mb-8">
+          {t('new.ctaText')}
+        </p>
+        
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href={translatePath('/contacto')} variant="primary" size="lg">
+            {t('new.contactUs')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
