@@ -64,10 +64,6 @@ const enUrl = new URL(getAlternateUrl(Astro.url, 'en'), Astro.site);
     <link rel="alternate" hreflang="x-default" href={esUrl.toString()} />
     
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
   </head>
   <body>
     <div class="flex flex-col min-h-screen">
@@ -81,17 +77,23 @@ const enUrl = new URL(getAlternateUrl(Astro.url, 'en'), Astro.site);
     </div>
 
     <script>
-      // Save scroll position before page unload
-      window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('scrollPosition', String(window.scrollY));
+      // Save scroll position before page unload (only when it's a language change)
+      window.addEventListener('beforeunload', (e) => {
+        if (sessionStorage.getItem('isLanguageChange') === 'true') {
+          sessionStorage.setItem('scrollPosition', String(window.scrollY));
+        }
       });
 
-      // Restore scroll position on page load
+      // Restore scroll position on page load (only when it was a language change)
       window.addEventListener('load', () => {
-        const savedPosition = sessionStorage.getItem('scrollPosition');
-        if (savedPosition) {
-          window.scrollTo(0, parseInt(savedPosition, 10));
+        if (sessionStorage.getItem('isLanguageChange') === 'true') {
+          const savedPosition = sessionStorage.getItem('scrollPosition');
+          if (savedPosition) {
+            window.scrollTo(0, parseInt(savedPosition, 10));
+          }
+          // Clean up flags
           sessionStorage.removeItem('scrollPosition');
+          sessionStorage.removeItem('isLanguageChange');
         }
       });
     </script>

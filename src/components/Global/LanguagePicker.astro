@@ -114,6 +114,14 @@ const languageLinks = Object.entries(languages).map(([code, label]) => ({
         e.stopPropagation();
         toggle();
       });
+
+      // Set flag when clicking a language link
+      const langLinks = dropdown.querySelectorAll('a');
+      langLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          sessionStorage.setItem('isLanguageChange', 'true');
+        });
+      });
     });
   }
 
