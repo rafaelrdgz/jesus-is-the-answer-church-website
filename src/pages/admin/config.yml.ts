@@ -122,7 +122,7 @@ collections:
         i18n: true
         fields:
           - {label: "Image File", name: "url", widget: "image", folder: "/uploads/blog", i18n: duplicate}
-          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image", i18n: duplicate}
+          - {label: "Alt Text", name: "alt", widget: "string", hint: "Describe the image", i18n: true}
       - {label: "Tags", name: "tags", widget: "list", default: ["general"], i18n: true}
       - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
       - {label: "Article Content / Contenido", name: "body", widget: "markdown", i18n: true, hint: "Full blog post content / Contenido del artículo"}
