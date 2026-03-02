@@ -1,30 +1,14 @@
 import { defineCollection, z } from 'astro:content';
 
-const localizedString = (defaultValue: string = '') => z.union([
-  z.object({
-    es: z.string().default(defaultValue),
-    en: z.string().default(defaultValue),
-  }),
-  z.string().transform(val => ({ es: val, en: val }))
-]);
-
-const optionalLocalizedString = () => z.union([
-  z.object({
-    es: z.string().optional(),
-    en: z.string().optional(),
-  }),
-  z.string().transform(val => ({ es: val, en: val }))
-]);
-
 const staffCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    name: localizedString(),
-    title: localizedString(),
+    name: z.string(),
+    title: z.string(),
     image: z.string().startsWith('/uploads/staff/'),
     email: z.string().email().optional(),
     phone: z.string().optional(),
-    bio: optionalLocalizedString(),
+    bio: z.string().optional(),
     order: z.number().default(0),
     draft: z.boolean().default(false),
   }),
@@ -33,13 +17,13 @@ const staffCollection = defineCollection({
 const eventsCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: localizedString(),
+    title: z.string(),
     date: z.date(),
     endDate: z.date().optional(),
     time: z.string().optional(),
-    location: localizedString(),
+    location: z.string(),
     image: z.string().startsWith('/uploads/events/'),
-    summary: optionalLocalizedString(),
+    summary: z.string().optional(),
     tags: z.array(z.string()).optional(),
     registrationLink: z.string().url().optional(),
     registrationRequired: z.boolean().default(false),
@@ -50,16 +34,16 @@ const eventsCollection = defineCollection({
 const sermonsCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: localizedString(),
+    title: z.string(),
     slug: z.string().optional(),
     date: z.date(),
-    speaker: localizedString(),
-    series: optionalLocalizedString(),
-    scripture: optionalLocalizedString(),
+    speaker: z.string(),
+    series: z.string().optional(),
+    scripture: z.string().optional(),
     audioUrl: z.string().url().optional(),
     videoUrl: z.string().url().optional(),
     image: z.string().startsWith('/uploads/sermons/').optional(),
-    summary: optionalLocalizedString(),
+    summary: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false),
   }),
@@ -68,12 +52,12 @@ const sermonsCollection = defineCollection({
 const ministriesCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    name: localizedString(),
+    name: z.string(),
     logo: z.string().startsWith('/uploads/ministries/').optional(),
-    summary: localizedString(),
-    coordinator: optionalLocalizedString(),
-    contact: optionalLocalizedString(),
-    schedule: optionalLocalizedString(),
+    summary: z.string(),
+    coordinator: z.string().optional(),
+    contact: z.string().optional(),
+    schedule: z.string().optional(),
     order: z.number().optional(),
     draft: z.boolean().default(false),
   }),
@@ -82,20 +66,14 @@ const ministriesCollection = defineCollection({
 const blogCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: localizedString(),
+    title: z.string(),
     slug: z.string().optional(),
     pubDate: z.date(),
-    description: localizedString(),
-    author: localizedString('Church Staff'),
+    description: z.string(),
+    author: z.string().default('Church Staff'),
     image: z.object({
       url: z.string().startsWith('/uploads/blog/'),
-      alt: z.union([
-        z.object({
-          es: z.string(),
-          en: z.string(),
-        }),
-        z.string().transform(val => ({ es: val, en: val }))
-      ])
+      alt: z.string()
     }).optional(),
     tags: z.array(z.string()).default(["general"]),
     draft: z.boolean().default(false),
@@ -105,7 +83,7 @@ const blogCollection = defineCollection({
 const siteInfoCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: localizedString(),
+    title: z.string(),
   }),
 });
 
