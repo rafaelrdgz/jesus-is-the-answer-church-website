@@ -6,7 +6,7 @@ email: "pastor.john@churchname.org"
 phone: "+1-555-0101"
 bio: "Pastor John has been faithfully serving our congregation for over 12 years, bringing wisdom, compassion, and biblical teaching to our community."
 order: 1
-draft: false
+draft: true
 ---
 
 Rev. Dr. John Smith has been the Senior Pastor of our church since 2013. He holds a Doctor of Ministry from Seminary University and has over 20 years of pastoral experience.

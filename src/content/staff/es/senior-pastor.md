@@ -6,7 +6,7 @@ email: "pastor.john@churchname.org"
 phone: "+1-555-0101"
 bio: "El Pastor John ha servido fielmente a nuestra congregacion por mas de 12 anos, trayendo sabiduria, compasion y ensenanza biblica a nuestra comunidad."
 order: 1
-draft: false
+draft: true
 ---
 
 Rev. Dr. John Smith ha sido el Pastor Principal de nuestra iglesia desde 2013. Tiene un Doctorado en Ministerio de Seminary University y cuenta con mas de 20 anos de experiencia pastoral.

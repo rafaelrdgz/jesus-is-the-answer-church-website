@@ -6,7 +6,7 @@ email: "michael.johnson@churchname.org"
 phone: "+1-555-0103"
 bio: "Pastor Michael leads our vibrant youth ministry with energy and vision, helping young people discover their identity in Christ."
 order: 3
-draft: false
+draft: true
 ---
 
 Pastor Michael joined our staff in 2020 after serving in youth ministry for over 8 years. He holds a Bachelor's degree in Youth Ministry from Example Christian University and is currently pursuing his Master of Divinity.

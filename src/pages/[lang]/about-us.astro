@@ -10,7 +10,7 @@ export function getStaticPaths() {
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
-import StaffList from "../../components/Sections/StaffList.astro";
+// import StaffList from "../../components/Sections/StaffList.astro";
 import Button from "../../components/UI/Button.astro";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
 
@@ -217,6 +217,7 @@ const translatePath = useTranslatedPath(langParams as any);
     </div>
   </section>
   
+  <!--
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="text-center mb-12">
@@ -235,6 +236,7 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
     </div>
   </section>
+  -->
   
   <section class="py-16">
     <div class="container">

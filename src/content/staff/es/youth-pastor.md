@@ -6,7 +6,7 @@ email: "youth@churchname.org"
 phone: "+1-555-0102"
 bio: "El Pastor Michael lidera nuestro ministerio juvenil con energia y pasion, conectando con la proxima generacion a traves de relaciones autenticas y ensenanza biblica relevante."
 order: 2
-draft: false
+draft: true
 ---
 
 El Pastor Michael Torres se unio a nuestro equipo en 2019, trayendo una pasion contagiosa por guiar a los jovenes en su camino de fe.

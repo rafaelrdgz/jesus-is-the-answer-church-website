@@ -23,23 +23,23 @@ i18n:
   default_locale: en
 
 collections:
-  # Staff - Miembros del personal
-  - name: "staff"
-    label: "Staff / Personal"
-    folder: "src/content/staff"
-    create: true
-    slug: "{{slug}}"
-    i18n: true
-    fields:
-      - {label: "Name / Nombre", name: "name", widget: "string", i18n: true}
-      - {label: "Title / Cargo", name: "title", widget: "string", i18n: true, hint: "e.g., Senior Pastor / Pastor Principal"}
-      - {label: "Image", name: "image", widget: "image", folder: "/uploads/staff", required: false, i18n: duplicate}
-      - {label: "Email", name: "email", widget: "string", required: false, i18n: duplicate}
-      - {label: "Phone", name: "phone", widget: "string", required: false, i18n: duplicate}
-      - {label: "Bio", name: "bio", widget: "text", required: false, i18n: true}
-      - {label: "Order", name: "order", widget: "number", default: 0, i18n: duplicate}
-      - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
-      - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Extended bio / Biografía extendida"}
+  # Staff - Miembros del personal (DESHABILITADO TEMPORALMENTE)
+  # - name: "staff"
+  #   label: "Staff / Personal"
+  #   folder: "src/content/staff"
+  #   create: true
+  #   slug: "{{slug}}"
+  #   i18n: true
+  #   fields:
+  #     - {label: "Name / Nombre", name: "name", widget: "string", i18n: true}
+  #     - {label: "Title / Cargo", name: "title", widget: "string", i18n: true, hint: "e.g., Senior Pastor / Pastor Principal"}
+  #     - {label: "Image", name: "image", widget: "image", folder: "/uploads/staff", required: false, i18n: duplicate}
+  #     - {label: "Email", name: "email", widget: "string", required: false, i18n: duplicate}
+  #     - {label: "Phone", name: "phone", widget: "string", required: false, i18n: duplicate}
+  #     - {label: "Bio", name: "bio", widget: "text", required: false, i18n: true}
+  #     - {label: "Order", name: "order", widget: "number", default: 0, i18n: duplicate}
+  #     - {label: "Draft", name: "draft", widget: "boolean", default: false, i18n: duplicate}
+  #     - {label: "Body / Contenido", name: "body", widget: "markdown", required: false, i18n: true, hint: "Extended bio / Biografía extendida"}
 
   # Events - Eventos
   - name: "events"
