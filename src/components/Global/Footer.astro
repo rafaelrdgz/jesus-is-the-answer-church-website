@@ -1,5 +1,4 @@
 ---
-import { getCollection } from "astro:content";
 import type { Lang } from "../../i18n/ui";
 import { defaultLang } from "../../i18n/ui";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
@@ -11,18 +10,6 @@ export interface Props {
 const { lang = defaultLang } = Astro.props;
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
-
-// Get the office hours from the siteInfo collection
-let officeHours;
-try {
-  const siteInfoEntries = await getCollection("siteInfo");
-  // Try locale-specific first, then fall back
-  officeHours = siteInfoEntries.find(entry => entry.id === `${lang}/office-hours`) 
-    ?? siteInfoEntries.find(entry => entry.id === "office-hours");
-} catch (error) {
-  // Collection might not exist yet when first setting up the project
-  console.log("Office hours not found or collections not yet available");
-}
 
 // Footer navigation groups — all translated
 const footerNavs = [
@@ -83,13 +70,6 @@ const socialLinks = [
 // Current year for copyright
 const currentYear = new Date().getFullYear();
 
-// Render office hours content if available
-let OfficeHoursContent = null;
-if (officeHours) {
-  const { Content } = await officeHours.render();
-  OfficeHoursContent = Content;
-}
-
 const homePath = translatePath('/');
 ---
 
@@ -126,19 +106,11 @@ const homePath = translatePath('/');
         <!-- Office Hours -->
         <div class="mt-4 text-gray-300">
           <h4 class="text-sm font-bold mb-2 text-white">{t('footer.officeHours')}</h4>
-          {
-            OfficeHoursContent ? (
-              <div class="text-sm prose prose-sm prose-invert max-w-none [&_h3]:text-white [&_h3]:text-sm [&_h3]:font-bold [&_h3]:mb-2 [&_ul]:list-none [&_ul]:p-0 [&_li]:mb-1 [&_strong]:text-white">
-                <OfficeHoursContent />
-              </div>
-            ) : (
-              <div class="text-sm">
-                <p><strong class="text-white">{t('footer.monFri')}</strong> {t('footer.monFriHours')}</p>
-                <p><strong class="text-white">{t('footer.saturday')}</strong> {t('footer.saturdayHours')}</p>
-                <p><strong class="text-white">{t('footer.sunday')}</strong> {t('footer.sundayHours')}</p>
-              </div>
-            )
-          }
+          <div class="text-sm">
+            <p><strong class="text-white">{t('footer.monFri')}</strong> {t('footer.monFriHours')}</p>
+            <p><strong class="text-white">{t('footer.saturday')}</strong> {t('footer.saturdayHours')}</p>
+            <p><strong class="text-white">{t('footer.sunday')}</strong> {t('footer.sundayHours')}</p>
+          </div>
         </div>
         
         <!-- Social Links -->
@@ -184,10 +156,6 @@ const homePath = translatePath('/');
     <!-- Copyright -->
     <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
       <p>&copy; {currentYear} {t('footer.copyright')}</p>
-      <p class="mt-2">
-        <a href={translatePath('/politica-de-privacidad')} class="hover:text-primary-300 mr-4">{t('footer.privacyPolicy')}</a>
-        <a href={translatePath('/terminos-de-servicio')} class="hover:text-primary-300">{t('footer.termsOfService')}</a>
-      </p>
     </div>
   </div>
 </footer>

@@ -105,18 +105,10 @@ const blogCollection = defineCollection({
   }),
 });
 
-const siteInfoCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-  }),
-});
-
 export const collections = {
   staff: staffCollection,
   events: eventsCollection,
   sermons: sermonsCollection,
   ministries: ministriesCollection,
   blog: blogCollection,
-  siteInfo: siteInfoCollection,
 };
