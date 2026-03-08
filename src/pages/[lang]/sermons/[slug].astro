@@ -50,7 +50,7 @@ const formattedDate = formatDate(entry.data.date, langParams);
 
 <BaseLayout
   lang={langParams}
-  title={`${localizedTitle} - Sermons - Church Name`}
+  title={`${localizedTitle} - ${t('sermons.heading')} - ${t('site.title')}`}
   description={localizedSummary || `Listen to "${localizedTitle}" by ${localizedSpeaker}`}
   image={entry.data.image ? { url: entry.data.image, alt: localizedTitle } : undefined}
   type="article"

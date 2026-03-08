@@ -49,7 +49,7 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
 
 <BaseLayout
   lang={langParams}
-  title={`${localizedTitle} - Events - Church Name`}
+  title={`${localizedTitle} - ${t('events.heading')} - ${t('site.title')}`}
   description={localizedSummary}
   image={{ url: entry.data.image, alt: localizedTitle }}
   type="article"

@@ -47,7 +47,7 @@ const localizedSchedule = localizedField(entry.data.schedule, langParams);
 
 <BaseLayout
   lang={langParams}
-  title={`${localizedName} - Church Name`}
+  title={`${localizedName} - ${t('site.title')}`}
   description={localizedSummary}
   image={entry.data.logo ? { url: entry.data.logo, alt: localizedName } : undefined}
 >

@@ -37,9 +37,9 @@ export const routes: Record<string, Record<string, string>> = {
 export const ui = {
   es: {
     // ==================== GLOBAL / LAYOUT ====================
-    'site.title': 'Jesús es la respuesta',
+    'site.title': 'Iglesia Jesús es la respuesta',
     'site.description': 'Un lugar de adoración reverente, comunión en Cristo y edificación en la Palabra.',
-    'site.imageAlt': 'Jesús es la respuesta',
+    'site.imageAlt': 'Iglesia Jesús es la respuesta',
 
     // ==================== NAVIGATION ====================
     'nav.home': 'Inicio',
@@ -127,7 +127,7 @@ export const ui = {
     'home.ctaContact': 'Contáctanos',
 
     // ==================== ABOUT US ====================
-    'about.title': 'Nosotros - Church Name',
+    'about.title': 'Nosotros - Jesús es la respuesta',
     'about.description': 'Conoce la historia, misión, valores y las personas que hacen especial a nuestra comunidad.',
     'about.heading': 'Nosotros',
     'about.subtitle': 'Nuestra Historia, Misión y Valores',
@@ -188,7 +188,7 @@ export const ui = {
     'about.belief7Text': 'Creemos en el regreso personal y visible de Jesucristo, la resurrección de los muertos, el juicio final y el estado eterno de bendición para los justos y castigo para los injustos.',
 
     // ==================== CONTACT ====================
-    'contact.title': 'Contáctanos - Church Name',
+    'contact.title': 'Contáctanos - Jesús es la respuesta',
     'contact.description': 'Ponte en contacto con nuestra iglesia. Encuentra nuestra información de contacto, ubicación y horarios de servicio.',
     'contact.heading': 'Contáctanos',
     'contact.subtitle': 'Nos encantaría saber de ti',
@@ -253,7 +253,7 @@ export const ui = {
     'contact.thankYouNewsletter': '¡Gracias por suscribirte a nuestro boletín!',
 
     // ==================== GIVING ====================
-    'giving.title': 'Ofrenda - Church Name',
+    'giving.title': 'Ofrenda - Jesús es la respuesta',
     'giving.description': 'Apoya la misión y los ministerios de nuestra iglesia a través de tu generosa ofrenda. Conoce las diferentes formas de dar.',
     'giving.heading': 'Ofrenda',
     'giving.subtitle': 'Apoyando nuestra misión a través de la generosidad',
@@ -282,7 +282,7 @@ export const ui = {
     'giving.bankName': 'Nombre del Banco:',
     'giving.bankNameValue': 'First National Bank',
     'giving.accountName': 'Nombre de la Cuenta:',
-    'giving.accountNameValue': 'Church Name',
+    'giving.accountNameValue': 'Jesús es la respuesta',
     'giving.routingNumber': 'Número de Ruta:',
     'giving.routingNumberValue': '123456789',
     'giving.accountNumber': 'Número de Cuenta:',
@@ -322,7 +322,7 @@ export const ui = {
     'giving.viewNeeds': 'Ver Necesidades Actuales →',
     'giving.findVolunteer': 'Encontrar Oportunidades de Voluntariado →',
     'giving.taxHeading': 'Información Fiscal',
-    'giving.taxP1': 'Church Name es una organización sin fines de lucro 501(c)(3). Todas las donaciones son deducibles de impuestos en la medida permitida por la ley.',
+    'giving.taxP1': 'Jesús es la respuesta es una organización sin fines de lucro 501(c)(3). Todas las donaciones son deducibles de impuestos en la medida permitida por la ley.',
     'giving.taxP2': 'Los recibos de donación se emiten para todas las contribuciones. Los estados de cuenta anuales de donaciones se proporcionan antes del 31 de enero para las donaciones del año anterior.',
     'giving.taxP3': 'Para preguntas sobre tu historial de donaciones o recibos fiscales, por favor contacta a nuestra oficina de finanzas al',
     'giving.taxId': 'ID Fiscal: 12-3456789',
@@ -332,7 +332,7 @@ export const ui = {
     'giving.contactUs': 'Contáctanos',
 
     // ==================== I'M NEW ====================
-    'new.title': 'Soy Nuevo - Church Name',
+    'new.title': 'Soy Nuevo - Jesús es la respuesta',
     'new.description': 'Todo lo que necesitas saber sobre visitar nuestra iglesia por primera vez. Encuentra horarios de servicio, qué esperar y cómo conectarte.',
     'new.heading': 'Soy Nuevo Aquí',
     'new.subtitle': '¡Bienvenido! Nos alegra que estés considerando visitarnos.',
@@ -396,7 +396,7 @@ export const ui = {
     'new.faq4Q': '¿Tienen instalaciones para madres lactantes?',
     'new.faq4A': 'Sí, tenemos una sala cómoda y privada para madres lactantes junto a la guardería. Está equipada con instalaciones para cambiar pañales, asientos cómodos y una transmisión de audio en vivo del servicio.',
     'new.faq5Q': '¿Cómo me conecto más allá de los servicios dominicales?',
-    'new.faq5A': 'La mejor manera de conectarte es a través de nuestros grupos pequeños y equipos de ministerio. Visita nuestro centro de bienvenida después del servicio y te ayudaremos a encontrar el lugar adecuado. También puedes asistir a nuestra clase "Nuevo en Church Name", ofrecida mensualmente.',
+    'new.faq5A': 'La mejor manera de conectarte es a través de nuestros grupos pequeños y equipos de ministerio. Visita nuestro centro de bienvenida después del servicio y te ayudaremos a encontrar el lugar adecuado. También puedes asistir a nuestra clase "Nuevo en Jesús es la respuesta", ofrecida mensualmente.',
     'new.ctaHeading': '¿Listo para Visitar?',
     'new.ctaText': 'Esperamos conocerte este domingo. Si tienes alguna pregunta antes de tu visita, no dudes en contactarnos.',
     'new.contactUs': 'Contáctanos',
@@ -407,7 +407,7 @@ export const ui = {
     'new.learnMoreKids': 'Más Información sobre el Ministerio Infantil',
 
     // ==================== STAFF ====================
-    'staff.title': 'Personal - Church Name',
+    'staff.title': 'Personal - Jesús es la respuesta',
     'staff.description': 'Conoce a nuestro dedicado personal y equipo de liderazgo que sirve a nuestra congregación con pasión y compromiso.',
     'staff.heading': 'Nuestro Personal',
     'staff.subtitle': 'Conoce a nuestro dedicado equipo de liderazgo',
@@ -417,7 +417,7 @@ export const ui = {
     'staff.learnMoreCta': 'Más Información Sobre Nuestra Iglesia',
 
     // ==================== BLOG ====================
-    'blog.title': 'Blog - Church Name',
+    'blog.title': 'Blog - Jesús es la respuesta',
     'blog.description': 'Lee nuestros últimos artículos, devocionales y actualizaciones de nuestra comunidad de la iglesia.',
     'blog.heading': 'Blog',
     'blog.subtitle': 'Ideas, devocionales y actualizaciones de nuestra comunidad de la iglesia',
@@ -447,7 +447,7 @@ export const ui = {
     'blogDetail.backToAll': 'Volver a Todas las Publicaciones',
 
     // ==================== SERMONS ====================
-    'sermons.title': 'Sermones - Church Name',
+    'sermons.title': 'Sermones - Jesús es la respuesta',
     'sermons.description': 'Escucha o mira nuestros últimos sermones. Explora nuestro archivo de sermones para crecer en tu fe y comprensión de la Palabra de Dios.',
     'sermons.heading': 'Sermones',
     'sermons.subtitle': 'Escucha o mira nuestros mensajes más recientes',
@@ -482,7 +482,7 @@ export const ui = {
     'sermonDetail.viewAllSeries': 'Ver Todo en Esta Serie',
 
     // ==================== EVENTS ====================
-    'events.title': 'Eventos - Church Name',
+    'events.title': 'Eventos - Jesús es la respuesta',
     'events.description': 'Mantente actualizado con los próximos eventos y actividades de nuestra iglesia. Encuentra información sobre servicios especiales, reuniones comunitarias y más.',
     'events.heading': 'Eventos',
     'events.subtitle': 'Acompáñanos en estas próximas actividades',
@@ -510,7 +510,7 @@ export const ui = {
     'eventDetail.questions': '¿Preguntas? Contáctanos',
 
     // ==================== MINISTRIES ====================
-    'ministries.title': 'Nuestros Ministerios',
+    'ministries.title': 'Nuestros Ministerios - Jesús es la respuesta',
     'ministries.description': 'Descubre nuestros ministerios.',
     'ministries.heading': 'Nuestros Ministerios',
     'ministries.subtitle': 'Formas de conectar, crecer y servir',
@@ -551,9 +551,9 @@ export const ui = {
 
   en: {
     // ==================== GLOBAL / LAYOUT ====================
-    'site.title': 'Jesus is the answer',
+    'site.title': 'Jesus is the answer Church',
     'site.description': 'A place of reverent worship, communion in Christ, and building up in the Word.',
-    'site.imageAlt': 'Jesus is the answer',
+    'site.imageAlt': 'Jesus is the answer Church',
 
     // ==================== NAVIGATION ====================
     'nav.home': 'Home',
@@ -641,7 +641,7 @@ export const ui = {
     'home.ctaContact': 'Contact Us',
 
     // ==================== ABOUT US ====================
-    'about.title': 'About Us - Church Name',
+    'about.title': 'About Us - Jesus is the answer',
     'about.description': 'Learn about our church\'s history, mission, values, and the people who make our community special.',
     'about.heading': 'About Us',
     'about.subtitle': 'Our History, Mission, and Values',
@@ -702,7 +702,7 @@ export const ui = {
     'about.belief7Text': 'We believe in the personal, visible return of Jesus Christ, the resurrection of the dead, the final judgment, and the eternal state of blessing for the righteous and punishment for the unrighteous.',
 
     // ==================== CONTACT ====================
-    'contact.title': 'Contact Us - Church Name',
+    'contact.title': 'Contact Us - Jesus is the answer',
     'contact.description': 'Get in touch with our church. Find our contact information, location, and service times.',
     'contact.heading': 'Contact Us',
     'contact.subtitle': "We'd love to hear from you",
@@ -767,7 +767,7 @@ export const ui = {
     'contact.thankYouNewsletter': 'Thank you for subscribing to our newsletter!',
 
     // ==================== GIVING ====================
-    'giving.title': 'Giving - Church Name',
+    'giving.title': 'Giving - Jesus is the answer',
     'giving.description': "Support our church's mission and ministries through your generous giving. Learn about the different ways to give.",
     'giving.heading': 'Giving',
     'giving.subtitle': 'Supporting our mission through generosity',
@@ -796,7 +796,7 @@ export const ui = {
     'giving.bankName': 'Bank Name:',
     'giving.bankNameValue': 'First National Bank',
     'giving.accountName': 'Account Name:',
-    'giving.accountNameValue': 'Church Name',
+    'giving.accountNameValue': 'Jesus is the answer',
     'giving.routingNumber': 'Routing Number:',
     'giving.routingNumberValue': '123456789',
     'giving.accountNumber': 'Account Number:',
@@ -836,7 +836,7 @@ export const ui = {
     'giving.viewNeeds': 'View Current Needs →',
     'giving.findVolunteer': 'Find Volunteer Opportunities →',
     'giving.taxHeading': 'Tax Information',
-    'giving.taxP1': 'Church Name is a 501(c)(3) non-profit organization. All donations are tax-deductible to the extent allowed by law.',
+    'giving.taxP1': 'Jesus is the answer is a 501(c)(3) non-profit organization. All donations are tax-deductible to the extent allowed by law.',
     'giving.taxP2': "Donation receipts are issued for all contributions. Annual giving statements are provided by January 31st for the previous year's donations.",
     'giving.taxP3': 'For questions about your giving history or tax receipts, please contact our finance office at',
     'giving.taxId': 'Tax ID: 12-3456789',
@@ -846,7 +846,7 @@ export const ui = {
     'giving.contactUs': 'Contact Us',
 
     // ==================== I'M NEW ====================
-    'new.title': "I'm New - Church Name",
+    'new.title': "I'm New - Jesus is the answer",
     'new.description': 'Everything you need to know about visiting our church for the first time. Find service times, what to expect, and how to get connected.',
     'new.heading': "I'm New Here",
     'new.subtitle': "Welcome! We're glad you're considering a visit.",
@@ -910,7 +910,7 @@ export const ui = {
     'new.faq4Q': 'Do you have facilities for nursing mothers?',
     'new.faq4A': "Yes, we have a comfortable, private nursing mothers' room adjacent to the nursery. It's equipped with changing facilities, comfortable seating, and a live audio feed of the service.",
     'new.faq5Q': 'How do I get connected beyond Sunday services?',
-    'new.faq5A': 'The best way to get connected is through our small groups and ministry teams. Visit our welcome center after the service, and we\'ll help you find the right fit. You can also attend our "New to Church Name" class, offered monthly.',
+    'new.faq5A': 'The best way to get connected is through our small groups and ministry teams. Visit our welcome center after the service, and we\'ll help you find the right fit. You can also attend our "New to Jesus is the answer" class, offered monthly.',
     'new.ctaHeading': 'Ready to Visit?',
     'new.ctaText': "We look forward to meeting you this Sunday. If you have any questions before your visit, please don't hesitate to contact us.",
     'new.contactUs': 'Contact Us',
@@ -921,7 +921,7 @@ export const ui = {
     'new.learnMoreKids': 'Learn More About Children\'s Ministry',
 
     // ==================== STAFF ====================
-    'staff.title': 'Staff - Church Name',
+    'staff.title': 'Staff - Jesus is the answer',
     'staff.description': 'Meet our dedicated church staff and leadership team who serve our congregation with passion and commitment.',
     'staff.heading': 'Our Staff',
     'staff.subtitle': 'Meet our dedicated leadership team',
@@ -931,7 +931,7 @@ export const ui = {
     'staff.learnMoreCta': 'Learn More About Our Church',
 
     // ==================== BLOG ====================
-    'blog.title': 'Blog - Church Name',
+    'blog.title': 'Blog - Jesus is the answer',
     'blog.description': 'Read our latest articles, devotionals, and updates from our church community.',
     'blog.heading': 'Blog',
     'blog.subtitle': 'Insights, devotionals, and updates from our church community',
@@ -961,7 +961,7 @@ export const ui = {
     'blogDetail.backToAll': 'Back to All Posts',
 
     // ==================== SERMONS ====================
-    'sermons.title': 'Sermons - Church Name',
+    'sermons.title': 'Sermons - Jesus is the answer',
     'sermons.description': "Listen to or watch our latest sermons. Explore our sermon archive to grow in your faith and understanding of God's Word.",
     'sermons.heading': 'Sermons',
     'sermons.subtitle': 'Listen to or watch our latest messages',
@@ -996,7 +996,7 @@ export const ui = {
     'sermonDetail.viewAllSeries': 'View All in This Series',
 
     // ==================== EVENTS ====================
-    'events.title': 'Events - Church Name',
+    'events.title': 'Events - Jesus is the answer',
     'events.description': 'Stay updated with upcoming events and activities at our church. Find information on special services, community gatherings, and more.',
     'events.heading': 'Events',
     'events.subtitle': 'Join us for these upcoming activities',
@@ -1024,7 +1024,7 @@ export const ui = {
     'eventDetail.questions': 'Questions? Contact Us',
 
     // ==================== MINISTRIES ====================
-    'ministries.title': 'Our Ministries',
+    'ministries.title': 'Our Ministries - Jesus is the answer',
     'ministries.description': 'Discover our ministries.',
     'ministries.heading': 'Our Ministries',
     'ministries.subtitle': 'Ways to connect, grow, and serve',
