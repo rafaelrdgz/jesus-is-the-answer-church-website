@@ -38,7 +38,7 @@ export const ui = {
   es: {
     // ==================== GLOBAL / LAYOUT ====================
     'site.title': 'Jesús es la respuesta',
-    'site.description': 'Somos una comunidad cristiana acogedora dedicada a compartir el amor de Dios a través de la adoración, la comunión y el servicio.',
+    'site.description': 'Un lugar de adoración reverente, comunión en Cristo y edificación en la Palabra.',
     'site.imageAlt': 'Jesús es la respuesta',
 
     // ==================== NAVIGATION ====================
@@ -552,7 +552,7 @@ export const ui = {
   en: {
     // ==================== GLOBAL / LAYOUT ====================
     'site.title': 'Jesus is the answer',
-    'site.description': 'We are a welcoming Christian community dedicated to sharing God\'s love through worship, fellowship, and service.',
+    'site.description': 'A place of reverent worship, communion in Christ, and building up in the Word.',
     'site.imageAlt': 'Jesus is the answer',
 
     // ==================== NAVIGATION ====================

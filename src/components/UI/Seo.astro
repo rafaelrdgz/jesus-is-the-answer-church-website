@@ -37,14 +37,14 @@ const ogLocaleAlternate = lang === 'es' ? 'en_US' : 'es_ES';
 const churchInfo = {
   name: "Jesús es la respuesta",
   address: {
-    streetAddress: "Dirección por confirmar",
-    addressLocality: "Ciudad",
-    addressRegion: "Estado",
-    postalCode: "Código Postal",
-    addressCountry: "MX",
+    streetAddress: "Edificio H-37 Apto 1 Zona 13 Alamar",
+    addressLocality: "La Habana del Este",
+    addressRegion: "La Habana",
+    postalCode: "12500",
+    addressCountry: "CU",
   },
-  telephone: "+52 (número por confirmar)",
-  email: "contacto@jesuseslarespuesta.com",
+  telephone: "+5354145936",
+  email: "rafaelrdguezcarmona@gmail.com",
   url: Astro.site?.toString() || "https://jesuseslarespuesta.vercel.app",
 };
 
@@ -79,7 +79,7 @@ const articleJsonLd = type === "article" ? JSON.stringify({
     "name": churchInfo.name,
     "logo": {
       "@type": "ImageObject",
-      "url": new URL("/uploads/logo.png", Astro.site).toString(),
+      "url": new URL("/uploads/logo.webp", Astro.site).toString(),
     },
   },
   "url": canonicalURL.toString(),
@@ -104,14 +104,15 @@ const articleJsonLd = type === "article" ? JSON.stringify({
 <meta property="og:image:alt" content={image.alt} />
 <meta property="og:locale" content={ogLocale} />
 <meta property="og:locale:alternate" content={ogLocaleAlternate} />
+<meta property="og:site_name" content={churchInfo.name} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image.url, Astro.site)} />
-<meta property="twitter:image:alt" content={image.alt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image.url, Astro.site)} />
+<meta name="twitter:image:alt" content={image.alt} />
 
 <!-- JSON-LD Schema for Church -->
 <script type="application/ld+json" set:html={churchJsonLd} />
