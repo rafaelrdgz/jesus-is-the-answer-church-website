@@ -32,6 +32,7 @@ const {
 } = Astro.props;
 
 const t = useTranslations(lang);
+const ga4Id = import.meta.env.GA4_MEASUREMENT_ID;
 
 const resolvedTitle = title ?? t('site.title');
 const resolvedDescription = description ?? t('site.description');
@@ -52,6 +53,16 @@ const enUrl = new URL(getAlternateUrl(Astro.url, 'en'), Astro.site);
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
+    
+    {ga4Id && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+      <script is:inline define:vars={{ ga4Id }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', ga4Id);
+      </script>
+    )}
     
     <script is:inline>
       // Check for saved language preference and redirect if needed
