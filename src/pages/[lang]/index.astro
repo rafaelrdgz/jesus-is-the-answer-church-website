@@ -38,25 +38,20 @@ const translatePath = useTranslatedPath(langParams as any);
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('home.joinUs')}</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div class="max-w-2xl mx-auto">
           <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-3">{t('home.morningService')}</h3>
             <p class="text-2xl font-bold text-primary-600 mb-2">{t('home.morningTime')}</p>
             <p class="text-gray-600 mb-4">{t('home.morningDesc')}</p>
             <p class="italic text-gray-500">{t('home.morningNote')}</p>
           </div>
-          
-          <div class="bg-gray-50 p-8 rounded-lg shadow-sm">
-            <h3 class="text-xl font-bold mb-3">{t('home.familyService')}</h3>
-            <p class="text-2xl font-bold text-primary-600 mb-2">{t('home.familyTime')}</p>
-            <p class="text-gray-600 mb-4">{t('home.familyDesc')}</p>
-            <p class="italic text-gray-500">{t('home.familyNote')}</p>
-          </div>
         </div>
         
-        <Button href={translatePath('/soy-nuevo')} variant="outline">
-          {t('home.planVisit')}
-        </Button>
+        <div class="mt-8">
+          <Button href={translatePath('/soy-nuevo')} variant="outline">
+            {t('home.planVisit')}
+          </Button>
+        </div>
       </div>
     </div>
   </section>
@@ -72,19 +67,22 @@ const translatePath = useTranslatedPath(langParams as any);
           />
         </div>
         
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('home.aboutHeading')}</h2>
-          <p class="text-gray-700 mb-6 text-lg">
-            {t('home.aboutP1')}
-          </p>
-          <p class="text-gray-700 mb-8 text-lg">
-            {t('home.aboutP2')}
-          </p>
-          
-          <Button href={translatePath('/nosotros')}>
-            {t('home.aboutCta')}
-          </Button>
-        </div>
+         <div>
+           <h2 class="text-3xl md:text-4xl font-bold mb-6">{t('home.aboutHeading')}</h2>
+           <p class="text-gray-700 mb-4 text-lg">
+             {t('home.aboutP1')}
+           </p>
+           <p class="text-gray-700 mb-4 text-lg">
+             {t('home.aboutP2')}
+           </p>
+           <p class="text-gray-700 mb-8 text-lg">
+             {t('home.aboutP3')}
+           </p>
+           
+           <Button href={translatePath('/nosotros')}>
+             {t('home.aboutCta')}
+           </Button>
+         </div>
       </div>
     </div>
   </section>
@@ -109,10 +107,10 @@ const translatePath = useTranslatedPath(langParams as any);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">{t('home.childrensMinistry')}</h3>
-          <p class="text-gray-700 mb-4">
-            {t('home.childrensDesc')}
-          </p>
+           <h3 class="text-xl font-bold mb-3">{t('home.childrensMinistry')}</h3>
+           <p class="text-gray-700 mb-4 whitespace-pre-line">
+             {t('home.childrensDesc')}
+           </p>
           <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
@@ -124,10 +122,10 @@ const translatePath = useTranslatedPath(langParams as any);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">{t('home.worshipMinistry')}</h3>
-          <p class="text-gray-700 mb-4">
-            {t('home.worshipDesc')}
-          </p>
+           <h3 class="text-xl font-bold mb-3">{t('home.worshipMinistry')}</h3>
+           <p class="text-gray-700 mb-4 whitespace-pre-line">
+             {t('home.worshipDesc')}
+           </p>
           <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
@@ -139,10 +137,10 @@ const translatePath = useTranslatedPath(langParams as any);
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
             </svg>
           </div>
-          <h3 class="text-xl font-bold mb-3">{t('home.outreachMinistry')}</h3>
-          <p class="text-gray-700 mb-4">
-            {t('home.outreachDesc')}
-          </p>
+           <h3 class="text-xl font-bold mb-3">{t('home.outreachMinistry')}</h3>
+           <p class="text-gray-700 mb-4 whitespace-pre-line">
+             {t('home.outreachDesc')}
+           </p>
           <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
