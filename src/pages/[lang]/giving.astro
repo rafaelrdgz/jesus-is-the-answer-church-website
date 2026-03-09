@@ -65,7 +65,7 @@ const translatePath = useTranslatedPath(langParams as any);
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         <div class="bg-white p-8 rounded-lg shadow-sm text-center">
           <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,58 +85,10 @@ const translatePath = useTranslatedPath(langParams as any);
           <h3 class="text-xl font-bold mb-3">{t('giving.byMail')}</h3>
           <p class="text-gray-700 mb-6">{t('giving.byMailText')}</p>
         </div>
-        
-        <div class="bg-white p-8 rounded-lg shadow-sm text-center">
-          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-bold mb-3">{t('giving.online')}</h3>
-          <p class="text-gray-700 mb-6">{t('giving.onlineText')}</p>
-          <Button variant="primary" size="sm">
-            {t('giving.giveOnline')}
-          </Button>
-        </div>
       </div>
     </div>
   </section>
-  
-  <section id="online-giving" class="py-16 bg-gray-50">
-    <div class="container">
-      <div class="max-w-3xl mx-auto">
-        <div class="bg-white p-8 rounded-lg shadow-md">
-          <h2 class="text-3xl font-bold mb-6 text-center">{t('giving.onlineGivingHeading')}</h2>
-          <div class="mb-8">
-            <h3 class="text-xl font-bold mb-4">{t('giving.creditCard')}</h3>
-            <div class="bg-gray-50 p-6 rounded-lg text-center">
-              <p class="text-gray-700 mb-4">{t('giving.creditCardText')}</p>
-              <a href="https://example.com/donate" target="_blank" rel="noopener noreferrer">
-                <Button variant="primary">
-                  {t('giving.donateNow')}
-                </Button>
-              </a>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold mb-4">{t('giving.bankTransfer')}</h3>
-            <div class="bg-gray-50 p-6 rounded-lg">
-              <p class="text-gray-700 mb-4">{t('giving.bankTransferText')}</p>
-              <div class="text-left mb-4">
-                <p><strong>{t('giving.bankName')}</strong> {t('giving.bankNameValue')}</p>
-                <p><strong>{t('giving.accountName')}</strong> {t('giving.accountNameValue')}</p>
-                <p><strong>{t('giving.routingNumber')}</strong> {t('giving.routingNumberValue')}</p>
-                <p><strong>{t('giving.accountNumber')}</strong> {t('giving.accountNumberValue')}</p>
-                <p><strong>{t('giving.memo')}</strong> {t('giving.memoValue')}</p>
-              </div>
-              <p class="text-sm text-gray-600 italic">{t('giving.bankNote')}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+   
   <section id="financial-accountability" class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -147,7 +99,7 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
       
       <div class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1">
           <div class="bg-white p-8 rounded-lg shadow-sm">
             <h3 class="text-xl font-bold mb-4">{t('giving.oversightHeading')}</h3>
             <ul class="space-y-3 text-gray-700">
@@ -163,46 +115,8 @@ const translatePath = useTranslatedPath(langParams as any);
                 </svg>
                 <span>{t('giving.oversight2')}</span>
               </li>
-              <li class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span>{t('giving.oversight3')}</span>
-              </li>
             </ul>
           </div>
-          
-          <div class="bg-white p-8 rounded-lg shadow-sm">
-            <h3 class="text-xl font-bold mb-4">{t('giving.transparencyHeading')}</h3>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span>{t('giving.transparency1')}</span>
-              </li>
-              <li class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span>{t('giving.transparency2')}</span>
-              </li>
-              <li class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-                <span>{t('giving.transparency3')}</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="mt-8 p-6 bg-gray-100 rounded-lg">
-          <h3 class="text-xl font-bold mb-3">{t('giving.annualReportHeading')}</h3>
-          <p class="text-gray-700 mb-4">{t('giving.annualReportText')}</p>
-          <p class="text-gray-700">
-            {t('giving.annualReportContact')} <a href={`mailto:${t('footer.email')}`} class="text-primary-600 hover:text-primary-700">{t('footer.email')}</a> {t('contact.phoneLabel')} <a href={`tel:${t('footer.phone').replace(/[^0-9]/g, '')}`} class="text-primary-600 hover:text-primary-700">{t('footer.phone')}</a>.
-          </p>
         </div>
       </div>
     </div>
@@ -217,15 +131,7 @@ const translatePath = useTranslatedPath(langParams as any);
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-3">{t('giving.plannedGiving')}</h3>
-          <p class="text-gray-700 mb-4">{t('giving.plannedGivingText')}</p>
-          <a href={translatePath('/contacto')} class="text-primary-600 font-medium hover:text-primary-700">
-            {t('giving.learnMore')}
-          </a>
-        </div>
-        
+      <div class="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-3xl mx-auto">
         <div class="bg-white p-8 rounded-lg shadow-sm">
           <h3 class="text-xl font-bold mb-3">{t('giving.inKind')}</h3>
           <p class="text-gray-700 mb-4">{t('giving.inKindText')}</p>
@@ -233,32 +139,10 @@ const translatePath = useTranslatedPath(langParams as any);
             {t('giving.viewNeeds')}
           </a>
         </div>
-        
-        <div class="bg-white p-8 rounded-lg shadow-sm">
-          <h3 class="text-xl font-bold mb-3">{t('giving.volunteerGiving')}</h3>
-          <p class="text-gray-700 mb-4">{t('giving.volunteerGivingText')}</p>
-          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
-            {t('giving.findVolunteer')}
-          </a>
-        </div>
       </div>
     </div>
   </section>
-  
-  <section class="py-16">
-    <div class="container">
-      <div class="max-w-3xl mx-auto">
-        <div class="bg-white p-8 rounded-lg shadow-md">
-          <h2 class="text-2xl font-bold mb-6">{t('giving.taxHeading')}</h2>
-          <p class="text-gray-700 mb-4">{t('giving.taxP1')}</p>
-          <p class="text-gray-700 mb-4">{t('giving.taxP2')}</p>
-          <p class="text-gray-700 mb-6">{t('giving.taxP3')} <a href={`tel:${t('footer.phone').replace(/[^0-9]/g, '')}`} class="text-primary-600 hover:text-primary-700">{t('footer.phone')}</a>.</p>
-          <p class="text-sm text-gray-600 italic">{t('giving.taxId')}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+   
   <section 
     class="py-20 bg-cover bg-center text-white"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/uploads/thank-you-bg.webp)"
@@ -271,9 +155,6 @@ const translatePath = useTranslatedPath(langParams as any);
         </p>
         
         <div class="flex flex-wrap justify-center gap-4">
-          <Button href="#online-giving" variant="primary" size="lg">
-            {t('giving.giveNow')}
-          </Button>
           <Button href={translatePath('/contacto')} variant="outline" size="lg" className="bg-white/10 text-white border-white hover:bg-white hover:text-gray-900 backdrop-blur-sm">
             {t('giving.contactUs')}
           </Button>
