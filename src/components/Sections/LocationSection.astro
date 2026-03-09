@@ -19,6 +19,8 @@ const content = variant === "im-new" ? {
   subtitle: t('new.locationSubtitle'),
   cardTitle: t('new.addressHeading'),
   address: t('new.churchAddress'),
+  lat: 23.16717896293332,
+  lng: -82.26415494639271,
   directions: [
     { title: t('new.parkingHeading'), text: t('new.parkingText') }
   ],
@@ -28,6 +30,8 @@ const content = variant === "im-new" ? {
   subtitle: t('contact.locationSubtitle'),
   cardTitle: t('contact.gettingHere'),
   address: t('footer.fullAddress'),
+  lat: 23.16717896293332,
+  lng: -82.26415494639271,
   directions: [
     { title: t('contact.byCar'), text: t('contact.byCarText') },
     { title: t('contact.publicTransit'), text: t('contact.publicTransitText') },
@@ -72,7 +76,7 @@ const content = variant === "im-new" ? {
             </div>
           ))}
           <div class="mt-6">
-            <Button href={`https://maps.google.com/?q=${encodeURIComponent(content.address)}`} variant="primary" target="_blank">
+            <Button href={`https://www.google.com/maps/dir//${content.lat},${content.lng}/`} variant="primary" target="_blank">
               {variant === "im-new" ? t('new.getDirections') : t('contact.getDirections')}
             </Button>
           </div>

@@ -18,7 +18,7 @@ const {
 
 <div 
   class:list={["rounded-lg overflow-hidden", className]}
-  style={`height: ${height};`}
+  style={`height: ${height}; z-index: 0;`}
   data-leaflet-map
   data-lat={lat}
   data-lng={lng}
@@ -28,6 +28,28 @@ const {
 </div>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<style is:global>
+  .leaflet-pane,
+  .leaflet-tile,
+  .leaflet-marker-icon,
+  .leaflet-control {
+    z-index: 1 !important;
+  }
+  
+  .leaflet-map-pane {
+    z-index: 1 !important;
+  }
+
+  .leaflet-control-zoom {
+    z-index: 1 !important;
+  }
+
+  .leaflet-control-container .leaflet-top,
+  .leaflet-control-container .leaflet-bottom {
+    z-index: 1 !important;
+  }
+</style>
 
 <script>
   function initMap() {
