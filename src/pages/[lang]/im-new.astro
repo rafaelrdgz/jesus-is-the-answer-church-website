@@ -11,7 +11,7 @@ export function getStaticPaths() {
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
 import Button from "../../components/UI/Button.astro";
-import GoogleMap from "../../components/UI/OpenStreetMap.astro";
+import LocationSection from "../../components/Sections/LocationSection.astro";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
 
 const { lang } = Astro.params;
@@ -158,42 +158,11 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
     </div>
   </section>
-  -->
+   -->
   
-  <section class="py-16">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('new.locationHeading')}</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          {t('new.locationSubtitle')}
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-            <GoogleMap height="100%" className="h-full w-full" markerText={t('footer.churchName')} />
-          </div>
-        </div>
-        <div>
-          <div class="bg-white p-8 rounded-lg shadow-sm h-full">
-            <h3 class="text-xl font-bold mb-4">{t('new.addressHeading')}</h3>
-            <address class="not-italic mb-6 text-gray-700">
-              <p class="text-lg">{t('new.churchAddress')}</p>
-            </address>
-            <h4 class="text-lg font-bold mb-2">{t('new.parkingHeading')}</h4>
-            <p class="text-gray-700 mb-6">{t('new.parkingText')}</p>
-            <!-- 
-            <h4 class="text-lg font-bold mb-2">{t('new.transitHeading')}</h4>
-            <p class="text-gray-700 mb-6">{t('new.transitText')}</p>
-            -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <LocationSection lang={langParams as any} variant="im-new" />
   
-  <!-- 
+  <!--
   <section class="py-16 bg-gray-50">
     <div class="container">
       <div class="text-center mb-12">

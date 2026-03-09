@@ -11,7 +11,7 @@ export function getStaticPaths() {
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
 import Button from "../../components/UI/Button.astro";
-import GoogleMap from "../../components/UI/OpenStreetMap.astro";
+import LocationSection from "../../components/Sections/LocationSection.astro";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
 
 const { lang } = Astro.params;
@@ -38,7 +38,7 @@ const translatePath = useTranslatedPath(langParams as any);
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
           <h2 class="text-3xl font-bold mb-6">{t('contact.formHeading')}</h2>
-          <form id="contact-form" class="space-y-6">
+          <form id="contact-form" action={`https://formspree.io/f/${import.meta.env.FORMSPREE_FORM_ID}`} method="POST" class="space-y-6">
             <div>
               <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{t('contact.nameLabel')}</label>
               <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" />
@@ -56,15 +56,7 @@ const translatePath = useTranslatedPath(langParams as any);
             
             <div>
               <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">{t('contact.subjectLabel')}</label>
-              <select id="subject" name="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
-                <option value="">{t('contact.subjectPlaceholder')}</option>
-                <option value="general">{t('contact.subjectGeneral')}</option>
-                <option value="prayer">{t('contact.subjectPrayer')}</option>
-                <option value="pastoral">{t('contact.subjectPastoral')}</option>
-                <option value="volunteer">{t('contact.subjectVolunteer')}</option>
-                <option value="events">{t('contact.subjectEvents')}</option>
-                <option value="other">{t('contact.subjectOther')}</option>
-              </select>
+              <input type="text" id="subject" name="subject" required placeholder={t('contact.subjectPlaceholder')} class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500" />
             </div>
             
             <div>
@@ -77,10 +69,22 @@ const translatePath = useTranslatedPath(langParams as any);
             </Button>
           </form>
           <script type="module">
-            document.getElementById("contact-form")?.addEventListener("submit", function(e) {
+            const form = document.getElementById("contact-form");
+            form?.addEventListener("submit", async function(e) {
               e.preventDefault();
-              alert("Thank you for your message! We will get back to you soon.");
-              this.reset();
+              const response = await fetch(this.action, {
+                method: this.method,
+                body: new FormData(this),
+                headers: {
+                  'Accept': 'application/json'
+                }
+              });
+              if (response.ok) {
+                alert("Thank you for your message! We will get back to you soon.");
+                this.reset();
+              } else {
+                alert("There was a problem sending your message. Please try again.");
+              }
             });
           </script>
         </div>
@@ -100,8 +104,7 @@ const translatePath = useTranslatedPath(langParams as any);
               <div class="ml-4">
                 <h3 class="text-xl font-bold mb-1">{t('contact.addressLabel')}</h3>
                 <address class="not-italic text-gray-700">
-                  <p>{t('footer.address1')}</p>
-                  <p>{t('footer.address2')}</p>
+                  {t('footer.fullAddress')}
                 </address>
               </div>
             </div>
@@ -149,14 +152,13 @@ const translatePath = useTranslatedPath(langParams as any);
               <div class="ml-4">
                 <h3 class="text-xl font-bold mb-1">{t('contact.officeHoursHeading')}</h3>
                 <div class="text-gray-700">
-                  <p><strong>{t('contact.monFri')}</strong> {t('contact.monFriHours')}</p>
-                  <p><strong>{t('contact.saturday')}</strong> {t('contact.saturdayHours')}</p>
-                  <p><strong>{t('contact.sunday')}</strong> {t('contact.sundayHours')}</p>
+                  <p><strong>{t('footer.wednesday')}</strong> {t('footer.wednesdayTime')}</p>
+                  <p><strong>{t('footer.sunday')}</strong> {t('footer.sundayTime')}</p>
                 </div>
               </div>
             </div>
           </div>
-          
+          <!--
           <h2 class="text-2xl font-bold mt-12 mb-6">{t('contact.connectHeading')}</h2>
           <div class="flex space-x-4">
             <a href="https://facebook.com/yourchurch" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary-600 transition-colors">
@@ -178,51 +180,15 @@ const translatePath = useTranslatedPath(langParams as any);
               </svg>
             </a>
           </div>
+          -->
         </div>
       </div>
     </div>
   </section>
   
-  <section class="py-16 bg-gray-50">
-    <div class="container">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">{t('contact.locationHeading')}</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          {t('contact.locationSubtitle')}
-        </p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-          <GoogleMap height="100%" className="h-full w-full" markerText={t('footer.churchName')} />
-        </div>
-        <div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold mb-4">{t('contact.gettingHere')}</h3>
-            <div class="space-y-6">
-              <div>
-                <h4 class="font-bold mb-2">{t('contact.byCar')}</h4>
-                <p class="text-gray-700">{t('contact.byCarText')}</p>
-              </div>
-              <div>
-                <h4 class="font-bold mb-2">{t('contact.publicTransit')}</h4>
-                <p class="text-gray-700">{t('contact.publicTransitText')}</p>
-              </div>
-              <div>
-                <h4 class="font-bold mb-2">{t('contact.accessibility')}</h4>
-                <p class="text-gray-700">{t('contact.accessibilityText')}</p>
-              </div>
-            </div>
-            <div class="mt-6">
-              <Button href="https://maps.google.com/?q=123+Main+Street,+Anytown,+ST+12345" variant="primary" target="_blank">
-                {t('contact.getDirections')}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <LocationSection lang={langParams as any} variant="im-new" />
   
+  <!-- Ministry Contacts Section (commented out)
   <section id="prayer" class="py-16">
     <div class="container">
       <div class="text-center mb-12">
@@ -300,7 +266,9 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
     </div>
   </section>
+  -->
   
+  <!-- Newsletter Section (commented out)
   <section id="newsletter" class="py-16 bg-primary-50">
     <div class="container">
       <div class="max-w-3xl mx-auto text-center">
@@ -329,4 +297,5 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
     </div>
   </section>
+  -->
 </BaseLayout>
