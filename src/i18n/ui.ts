@@ -85,6 +85,10 @@ export const ui = {
     'footer.newsletter': 'Boletín',
     'footer.volunteer': 'Voluntariado',
 
+    // ==================== FOOTER DEVELOPER ====================
+    'footer.madeWithLove': 'Elaborado con ❤️ por',
+    'footer.developerName': 'Rafael Rodriguez',
+
     // ==================== LANGUAGE PICKER ====================
     'lang.switchTo': 'Cambiar idioma',
     'lang.current': 'Español',
@@ -583,6 +587,10 @@ export const ui = {
     'footer.prayerRequest': 'Prayer Request',
     'footer.newsletter': 'Newsletter',
     'footer.volunteer': 'Volunteer',
+
+    // ==================== FOOTER DEVELOPER ====================
+    'footer.madeWithLove': 'Made with ❤️ by',
+    'footer.developerName': 'Rafael Rodriguez',
 
     // ==================== LANGUAGE PICKER ====================
     'lang.switchTo': 'Switch language',
