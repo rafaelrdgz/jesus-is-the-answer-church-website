@@ -193,7 +193,7 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div class="bg-gray-200 rounded-lg overflow-hidden h-96">
-          <GoogleMap height="100%" className="h-full w-full" markerText={langParams === 'es' ? `Iglesia ${t('footer.churchName')}` : `${t('footer.churchName')} Church`} />
+          <GoogleMap height="100%" className="h-full w-full" markerText={t('footer.churchName')} />
         </div>
         <div>
           <div class="bg-white p-8 rounded-lg shadow-md">
