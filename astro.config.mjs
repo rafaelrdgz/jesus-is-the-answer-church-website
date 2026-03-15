@@ -10,6 +10,11 @@ export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
   output: 'server',
   trailingSlash: 'always',
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
+  },
   adapter: vercel(),
   integrations: [
     tailwind(),

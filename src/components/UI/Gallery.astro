@@ -1,0 +1,156 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  images: ImageMetadata[];
+  title: string;
+  altPrefix?: string;
+}
+
+const { images, title, altPrefix = 'Imagen' } = Astro.props;
+const galleryId = `gallery-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
+    </div>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {images.map((image, index) => (
+        <button 
+          class="gallery-item relative overflow-hidden rounded-lg aspect-square cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary-600"
+          data-index={index}
+          data-gallery={galleryId}
+          aria-label={`Ver ${altPrefix} ${index + 1}`}
+        >
+          <Image 
+            src={image} 
+            alt={`${altPrefix} ${index + 1}`}
+            width={400}
+            height={400}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<div class="lightbox-container" data-gallery={galleryId}>
+  <div class="lightbox hidden fixed inset-0 z-50 bg-black/95 items-center justify-center">
+    <button class="lightbox-close absolute top-4 right-4 text-white/70 hover:text-white text-4xl z-10 w-12 h-12 flex items-center justify-center" aria-label="Cerrar">
+      &times;
+    </button>
+    <button class="lightbox-prev absolute left-4 text-white/70 hover:text-white text-5xl z-10 w-12 h-12 flex items-center justify-center" aria-label="Imagen anterior">
+      &#8249;
+    </button>
+    <button class="lightbox-next absolute right-4 text-white/70 hover:text-white text-5xl z-10 w-12 h-12 flex items-center justify-center" aria-label="Siguiente imagen">
+      &#8250;
+    </button>
+    
+    <img class="lightbox-image max-w-[90vw] max-h-[90vh] object-contain" src="" alt="" />
+    
+    <div class="lightbox-counter absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const containers = document.querySelectorAll('.lightbox-container');
+    
+    containers.forEach(container => {
+      const galleryId = container.getAttribute('data-gallery');
+      const lightbox = container.querySelector('.lightbox') as HTMLElement;
+      const lightboxImage = container.querySelector('.lightbox-image') as HTMLImageElement;
+      const lightboxCounter = container.querySelector('.lightbox-counter');
+      const closeBtn = container.querySelector('.lightbox-close');
+      const prevBtn = container.querySelector('.lightbox-prev');
+      const nextBtn = container.querySelector('.lightbox-next');
+      const items = container.parentElement?.querySelectorAll(`.gallery-item[data-gallery="${galleryId}"]`) || [];
+      
+      let currentIndex = 0;
+      const images: string[] = [];
+      
+      items.forEach((item) => {
+        const img = item.querySelector('img');
+        if (img?.src) {
+          images.push(img.src);
+        }
+      });
+      
+      const openLightbox = (index: number) => {
+        currentIndex = index;
+        updateLightboxImage();
+        lightbox?.classList.remove('hidden');
+        lightbox?.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      };
+      
+      const closeLightbox = () => {
+        lightbox?.classList.add('hidden');
+        lightbox?.classList.remove('flex');
+        document.body.style.overflow = '';
+      };
+      
+      const updateLightboxImage = () => {
+        if (lightboxImage && images[currentIndex]) {
+          lightboxImage.src = images[currentIndex];
+          lightboxImage.alt = `Imagen ${currentIndex + 1} de ${images.length}`;
+          if (lightboxCounter) {
+            lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+          }
+        }
+      };
+      
+      const nextImage = () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightboxImage();
+      };
+      
+      const prevImage = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightboxImage();
+      };
+      
+      items.forEach((item, index) => {
+        item.addEventListener('click', () => openLightbox(index));
+      });
+      
+      closeBtn?.addEventListener('click', closeLightbox);
+      nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+      prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+      
+      lightbox?.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      const openLightbox = document.querySelector('.lightbox.flex');
+      if (openLightbox) {
+        const container = openLightbox.closest('.lightbox-container');
+        const images = container?.parentElement?.querySelectorAll('.gallery-item') || [];
+        const currentIndex = Array.from(images).findIndex(img => img === document.activeElement);
+        
+        if (e.key === 'Escape') {
+          openLightbox.classList.add('hidden');
+          openLightbox.classList.remove('flex');
+          document.body.style.overflow = '';
+        }
+        if (e.key === 'ArrowRight') {
+          const next = (currentIndex + 1) % images.length;
+          (images[next] as HTMLElement)?.click();
+        }
+        if (e.key === 'ArrowLeft') {
+          const prev = (currentIndex - 1 + images.length) % images.length;
+          (images[prev] as HTMLElement)?.click();
+        }
+      }
+    });
+  });
+</script>

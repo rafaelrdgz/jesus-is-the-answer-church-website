@@ -12,7 +12,33 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHeader from "../../components/Sections/PageHeader.astro";
 // import StaffList from "../../components/Sections/StaffList.astro";
 import Button from "../../components/UI/Button.astro";
+import Gallery from "../../components/UI/Gallery.astro";
 import { useTranslations, useTranslatedPath } from "../../i18n/utils";
+
+import inicio1 from "../../assets/before/inicio-1.jpg";
+import inicio2 from "../../assets/before/inicio-2.jpg";
+import inicio3 from "../../assets/before/inicio-3.jpg";
+import inicio4 from "../../assets/before/inicio-4.jpg";
+import inicio5 from "../../assets/before/inicio-5.jpg";
+import inicio6 from "../../assets/before/inicio-6.jpg";
+import inicio7 from "../../assets/before/inicio-7.jpg";
+import inicio8 from "../../assets/before/inicio-8.jpg";
+import inicio9 from "../../assets/before/inicio-9.jpg";
+import inicio10 from "../../assets/before/inicio-10.jpg";
+
+import actualidad1 from "../../assets/after/actualidad-1.jpg";
+import actualidad2 from "../../assets/after/actualidad-2.jpg";
+import actualidad3 from "../../assets/after/actualidad-3.jpg";
+import actualidad4 from "../../assets/after/actualidad-4.jpg";
+import actualidad5 from "../../assets/after/actualidad-5.jpg";
+import actualidad6 from "../../assets/after/actualidad-6.jpg";
+import actualidad7 from "../../assets/after/actualidad-7.jpg";
+import actualidad8 from "../../assets/after/actualidad-8.jpg";
+import actualidad9 from "../../assets/after/actualidad-9.jpg";
+import actualidad10 from "../../assets/after/actualidad-10.jpg";
+
+const beforeImages = [inicio1, inicio2, inicio3, inicio4, inicio5, inicio6, inicio7, inicio8, inicio9, inicio10];
+const afterImages = [actualidad1, actualidad2, actualidad3, actualidad4, actualidad5, actualidad6, actualidad7, actualidad8, actualidad9, actualidad10];
 
 const { lang } = Astro.params;
 const langParams = lang || 'es';
@@ -152,6 +178,10 @@ const translatePath = useTranslatedPath(langParams as any);
       </div>
     </div>
   </section>
+
+  <Gallery images={beforeImages} title={t('about.galleryBeforeTitle')} altPrefix="Imagen de nuestros inicios" />
+  
+  <Gallery images={afterImages} title={t('about.galleryAfterTitle')} altPrefix="Imagen de nuestra actualidad" />
   
   <!--
   <section class="py-16 bg-gray-50">
