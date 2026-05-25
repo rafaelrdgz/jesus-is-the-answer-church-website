@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 // Helper: converts empty strings from Decap CMS to undefined so
 // that Zod's .optional() treats them as missing values.
 const emptyToUndefined = (val: unknown) =>
-  typeof val === 'string' && val.trim() === '' ? undefined : val;
+  val === null || (typeof val === 'string' && val.trim() === '') ? undefined : val;
 
 // Optional string that gracefully handles empty strings from the CMS
 const optionalString = () =>
@@ -83,7 +83,7 @@ const ministriesCollection = defineCollection({
     coordinator: optionalString(),
     contact: optionalString(),
     schedule: optionalString(),
-    order: z.number().optional(),
+    order: z.preprocess(emptyToUndefined, z.number().optional()),
     draft: z.boolean().default(false),
   }),
 });

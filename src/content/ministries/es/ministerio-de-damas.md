@@ -5,8 +5,6 @@ summary: "El Ministerio de Mujeres fortalece la vida espiritual y comunitaria de
   las hermanas, guiándolas en discipulado, comunión y servicio.  Anhelo  que
   cada mujer viva como sierva del Señor y refleje que Jesús es la respuesta.  "
 coordinator: Maritza Rivera
-contact: null
-order: null
 draft: false
 ---
 Ministerio de damas.
