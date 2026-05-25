@@ -1,9 +1,12 @@
 ---
 name: Ministerio de Niños
+logo: /uploads/img-20260525-wa0010.jpg
 summary: El Ministerio Infantil tiene la visión de que cada niño, tanto en la
   iglesia como en la comunidad, crezca en el conocimiento y el amor de Cristo,
   viviendo como un discípulo fiel que transforma su entorno con el Evangelio.
 coordinator: Marjorie Bonora
+contact: null
+order: null
 draft: false
 ---
 Visión  y Trabajo del Ministerio de Niños
