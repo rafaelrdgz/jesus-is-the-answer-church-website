@@ -1,4 +1,5 @@
 ---
+name: Ministerio de Hombres
 logo: /uploads/img_20241225_131753.jpg
 summary: >-
   Ministerio de Hombres.
