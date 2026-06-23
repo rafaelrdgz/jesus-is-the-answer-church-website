@@ -13,13 +13,29 @@ import HeroSection from "../../components/Sections/HeroSection.astro";
 import EventList from "../../components/Sections/EventList.astro";
 import SermonList from "../../components/Sections/SermonList.astro";
 import Button from "../../components/UI/Button.astro";
-import { getLangFromUrl, useTranslations, useTranslatedPath } from "../../i18n/utils";
+import { getLangFromUrl, useTranslations, useTranslatedPath, filterByLocale, getSlugFromId } from "../../i18n/utils";
+import { getCollection } from "astro:content";
 
 const { lang } = Astro.params;
 const langParams = lang || 'es';
 
 const t = useTranslations(langParams as any);
 const translatePath = useTranslatedPath(langParams as any);
+
+const allMinistries = await getCollection("ministries", ({ data }) =>
+  import.meta.env.PROD ? !data.draft : true
+);
+const localeMinistries = filterByLocale(allMinistries, langParams as any);
+
+const childrensMin = localeMinistries.find(m =>
+  ["niño", "niños", "children"].some(k => m.data.name.toLowerCase().includes(k))
+);
+const evangelismMin = localeMinistries.find(m =>
+  ["evangel"].some(k => m.data.name.toLowerCase().includes(k))
+);
+const womensMin = localeMinistries.find(m =>
+  ["mujer", "dama", "women", "woman"].some(k => m.data.name.toLowerCase().includes(k))
+);
 ---
 
 <BaseLayout lang={langParams as any}>
@@ -111,7 +127,7 @@ const translatePath = useTranslatedPath(langParams as any);
            <p class="text-gray-700 mb-4 whitespace-pre-line">
              {t('home.childrensDesc')}
            </p>
-          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={childrensMin ? `${translatePath('/ministerios')}/${getSlugFromId(childrensMin.id)}` : translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
         </div>
@@ -126,7 +142,7 @@ const translatePath = useTranslatedPath(langParams as any);
            <p class="text-gray-700 mb-4 whitespace-pre-line">
              {t('home.worshipDesc')}
            </p>
-          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={evangelismMin ? `${translatePath('/ministerios')}/${getSlugFromId(evangelismMin.id)}` : translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
         </div>
@@ -141,7 +157,7 @@ const translatePath = useTranslatedPath(langParams as any);
            <p class="text-gray-700 mb-4 whitespace-pre-line">
              {t('home.outreachDesc')}
            </p>
-          <a href={translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
+          <a href={womensMin ? `${translatePath('/ministerios')}/${getSlugFromId(womensMin.id)}` : translatePath('/ministerios')} class="text-primary-600 font-medium hover:text-primary-700">
             {t('home.learnMore')}
           </a>
         </div>

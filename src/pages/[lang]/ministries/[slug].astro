@@ -52,7 +52,7 @@ const localizedSchedule = localizedField(entry.data.schedule, langParams);
   image={entry.data.logo ? { url: entry.data.logo, alt: localizedName } : undefined}
 >
   <PageHeader 
-    title={`${localizedName}${t('ministryDetail.suffix')}`}
+    title={localizedName}
     backgroundImage="/uploads/ministry-detail-bg.webp"
     lang={langParams}
   />
