@@ -31,11 +31,12 @@ const {
 ---
 
 <section
-  class="relative min-h-[70vh] flex items-center bg-cover pt-30"
-  style={`background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${backgroundImage}); background-position: center 20%;`}
+  class="hero-section relative min-h-[70vh] flex items-center bg-cover pt-30"
+  style={`background-image: url(${backgroundImage}); background-position: center 30%
+  ;`}
 >
 
-  <div class="container">
+  {/*}<div class="container">
     <div class="max-w-3xl text-white">
       <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">{title}</h1>
       <p class="text-xl md:text-2xl mb-8">{subtitle}</p>
@@ -50,5 +51,26 @@ const {
         </Button>
       </div>
     </div>
-  </div>
+  </div>*/}
 </section>
+
+<style define:vars={{ heroBg: `url(${backgroundImage})` }}>
+  @media (max-width: 767px) {
+    .hero-section {
+      background-image: none !important;
+      min-height: 0 !important;
+      aspect-ratio: 8 / 9;
+    }
+
+    .hero-section::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--heroBg);
+      background-size: auto 100%;
+      background-position: top center;
+      background-repeat: no-repeat;
+      z-index: -1;
+    }
+  }
+</style>
