@@ -2,6 +2,7 @@
 title: "“Despierta, Iglesia: El Reino de Dios no se edifica con espectadores”"
 slug: null
 date: 2026-07-05T10:00:00.000-04:00
+speaker: "Pastor Rafael"
 audioUrl: null
 videoUrl: null
 image: /uploads/img-20260802-wa0004.jpg

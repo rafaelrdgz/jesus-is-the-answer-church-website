@@ -1,7 +1,7 @@
 ---
 title: "Wake Up, Church: The Kingdom of God Is Not Built by Spectators"
 date: 2026-07-05T10:00:00.000-04:00
-speaker: "Pastor Rafael "
+speaker: "Pastor Rafael"
 image: /uploads/img-20260802-wa0004.jpg
 draft: false
 ---

@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import decapCmsOauth from 'astro-decap-cms-oauth';
+import remarkBreaks from 'remark-breaks';
 
 // https://astro.build/config
 export default defineConfig({
@@ -36,6 +37,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    remarkPlugins: [remarkBreaks],
     shikiConfig: {
       theme: 'github-light',
       wrap: true
