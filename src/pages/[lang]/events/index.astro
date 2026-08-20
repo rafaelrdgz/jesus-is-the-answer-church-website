@@ -93,8 +93,6 @@ const pastEvents = localeEvents.filter(event => isPastDate(event.data.date))
               <span>{localizedField(event.data.location, langParams as any)}</span>
             </div>
             
-            <p class="text-gray-700 mb-4">{localizedField(event.data.summary, langParams as any)}</p>
-            
             <p class="text-primary-600 font-medium group-hover:underline group-hover:text-primary-700">
               {t('events.learnMore')}
             </p>
@@ -140,8 +138,6 @@ const pastEvents = localeEvents.filter(event => isPastDate(event.data.date))
                 <span>{localizedField(event.data.location, langParams as any)}</span>
               </div>
               
-              <p class="text-gray-700 mb-4">{localizedField(event.data.summary, langParams as any)}</p>
-
               <p class="text-primary-600 font-medium group-hover:underline group-hover:text-primary-700">
                 {t('events.viewDetails')}
               </p>
