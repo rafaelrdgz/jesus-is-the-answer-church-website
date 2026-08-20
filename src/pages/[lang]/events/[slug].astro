@@ -45,19 +45,21 @@ const localizedLocation = localizedField(entry.data.location, langParams);
 const formattedDate = formatDate(entry.data.date, langParams);
 const formattedEndDate = entry.data.endDate ? formatDate(entry.data.endDate, langParams) : null;
 const isFutureEvent = new Date(entry.data.date) > new Date();
+const heroImage = entry.data.image || entry.data.images?.[0];
+const galleryImages = (entry.data.images ?? []).filter((img) => img !== heroImage);
 ---
 
 <BaseLayout
   lang={langParams}
   title={`${localizedTitle} - ${t('events.heading')} - ${t('site.title')}`}
   description={localizedSummary}
-  image={{ url: entry.data.image, alt: localizedTitle }}
+  image={heroImage ? { url: heroImage, alt: localizedTitle } : undefined}
   type="article"
 >
   <PostLayout
     title={localizedTitle}
     description={localizedSummary}
-    image={{ url: entry.data.image, alt: localizedTitle }}
+    image={heroImage ? { url: heroImage, alt: localizedTitle } : undefined}
     date={entry.data.date}
     tags={entry.data.tags}
     type="event"
@@ -115,6 +117,31 @@ const isFutureEvent = new Date(entry.data.date) > new Date();
     <article class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-primary-600 hover:prose-a:text-primary-700">
       <Content />
     </article>
+
+    {galleryImages.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-6">{t('eventDetail.gallery')}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {galleryImages.map((img) => (
+            <a
+              href={img}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block overflow-hidden rounded-lg group"
+              aria-label={localizedTitle}
+            >
+              <img
+                src={img}
+                alt={localizedTitle}
+                class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+                format="webp"
+              />
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
     
     <div class="mt-12 flex flex-wrap gap-4">
       {isFutureEvent && entry.data.registrationLink && (

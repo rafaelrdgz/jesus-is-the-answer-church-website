@@ -55,6 +55,17 @@ collections:
       - {label: "Time / Hora", name: "time", widget: "string", hint: "e.g., 09:00 AM - 11:00 AM", required: false, i18n: duplicate}
       - {label: "Location / Lugar", name: "location", widget: "string", i18n: true}
       - {label: "Image", name: "image", widget: "image", folder: "/uploads/events", i18n: duplicate}
+      - label: "Gallery / Galería"
+        name: "images"
+        widget: "list"
+        required: false
+        i18n: duplicate
+        hint: "Additional images shown on the event page / Imágenes adicionales en la página del evento"
+        field:
+          label: "Image / Imagen"
+          name: "image"
+          widget: "image"
+          folder: "/uploads/events"
       - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
       - {label: "Tags", name: "tags", widget: "list", required: false, i18n: true}
       - {label: "Registration Link", name: "registrationLink", widget: "string", required: false, i18n: duplicate}

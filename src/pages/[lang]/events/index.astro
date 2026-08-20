@@ -63,10 +63,10 @@ const pastEvents = localeEvents.filter(event => isPastDate(event.data.date))
         {upcomingEvents.map((event) => (
           <Card
             title={localizedField(event.data.title, langParams as any)}
-            image={{
-              src: event.data.image,
+            image={event.data.image || event.data.images?.[0] ? {
+              src: event.data.image || event.data.images?.[0],
               alt: localizedField(event.data.title, langParams as any)
-            }}
+            } : undefined}
             href={`${translatePath('/eventos')}/${getSlugFromId(event.id)}`}
           >
             <div class="mb-3 flex items-center text-gray-600">
@@ -118,10 +118,10 @@ const pastEvents = localeEvents.filter(event => isPastDate(event.data.date))
           {pastEvents.map((event) => (
             <Card
               title={localizedField(event.data.title, langParams as any)}
-              image={{
-                src: event.data.image,
+              image={event.data.image || event.data.images?.[0] ? {
+                src: event.data.image || event.data.images?.[0],
                 alt: localizedField(event.data.title, langParams as any)
-              }}
+              } : undefined}
               href={`${translatePath('/eventos')}/${getSlugFromId(event.id)}`}
               className="opacity-90 hover:opacity-100"
             >

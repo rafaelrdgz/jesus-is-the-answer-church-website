@@ -519,6 +519,7 @@ export const ui = {
     'eventDetail.registerBtn': 'Registrarse para Este Evento',
     'eventDetail.backToAll': 'Volver a Todos los Eventos',
     'eventDetail.questions': '¿Preguntas? Contáctanos',
+    'eventDetail.gallery': 'Galería',
 
     // ==================== MINISTRIES ====================
     'ministries.title': 'Nuestros Ministerios - Jesús es la respuesta',
@@ -1044,6 +1045,7 @@ export const ui = {
     'eventDetail.registerBtn': 'Register for This Event',
     'eventDetail.backToAll': 'Back to All Events',
     'eventDetail.questions': 'Questions? Contact Us',
+    'eventDetail.gallery': 'Gallery',
 
     // ==================== MINISTRIES ====================
     'ministries.title': 'Our Ministries - Jesus is the answer',

@@ -25,6 +25,16 @@ const optionalImage = () =>
 // Required image path (allows any non-empty path)
 const requiredImage = () => z.string().min(1);
 
+// Optional list of image paths (filters empty strings from the CMS)
+const optionalImageList = () =>
+  z.preprocess(
+    (val) => {
+      const arr = Array.isArray(val) ? val : [];
+      return arr.map(emptyToUndefined).filter(Boolean);
+    },
+    z.array(z.string()).optional()
+  );
+
 const staffCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -48,6 +58,7 @@ const eventsCollection = defineCollection({
     time: optionalString(),
     location: z.string(),
     image: z.preprocess(emptyToUndefined, requiredImage().optional()),
+    images: optionalImageList(),
     summary: optionalString(),
     tags: z.array(z.string()).optional(),
     registrationLink: optionalUrl(),
