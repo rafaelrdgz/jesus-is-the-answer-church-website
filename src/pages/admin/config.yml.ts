@@ -59,7 +59,7 @@ collections:
         name: "images"
         widget: "list"
         required: false
-        i18n: true
+        i18n: duplicate
         hint: "Additional images shown on the event page / Imágenes adicionales en la página del evento"
         field:
           label: "Image / Imagen"
