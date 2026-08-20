@@ -2,8 +2,10 @@
 title: Escuela Bíblica de Verano 2026
 date: 2026-08-18T10:00:00.000-04:00
 endDate: 2026-08-18T00:00:00.000-04:00
+time: null
 location: "Iglesia Jesús es la respuesta "
 image: /uploads/img-20260819-wa0006.jpg
+images: []
 summary: >
   Escuela Bíblica de Verano 2026
 
@@ -17,8 +19,8 @@ summary: >
 
 
   Con gratitud sincera damos gracias a Dios por levantar hermanos y voluntarios que reflejaron el amor de Cristo en su servicio. Su entrega fue un testimonio vivo de que cuando servimos a los pequeños, servimos al mismo Señor.  
-
    ¡A Cristo sea toda la gloria! Que Su luz siga brillando en nuestras familias y en nuestra comunidad, hasta que Él venga.  
+registrationLink: null
 registrationRequired: false
 draft: false
 ---
