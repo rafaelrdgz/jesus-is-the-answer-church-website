@@ -3,10 +3,11 @@ title: Summer Bible School 2026
 date: 2026-08-18T10:00:00.000-04:00
 endDate: 2026-08-18T00:00:00.000-04:00
 location: "Jesus is the answer church "
-image: /uploads/img-20260819-wa0006.jpg
+image: /uploads/img-20260819-wa0003.jpg
 images:
   - /uploads/giving-header-bg.webp
   - /uploads/img-20260802-wa0004.jpg
+  - /uploads/img-20260819-wa0007.jpg
 summary: >
   Summer Bible School 2026
 
