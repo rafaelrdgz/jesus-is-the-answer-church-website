@@ -1,6 +1,10 @@
 ---
 name: The Children's Ministry
 logo: /uploads/img_20260414_145017.jpg
+images:
+  - /uploads/img-20260525-wa0010.jpg
+  - /uploads/img-20260819-wa0003.jpg
+  - /uploads/img-20260819-wa0006.jpg
 summary: The Children's Ministry has the vision that every child, both in the
   church and in the community, will grow in the knowledge and love of Christ,
   living as a faithful disciple who transforms their environment with the
