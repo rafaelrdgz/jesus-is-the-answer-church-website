@@ -43,6 +43,7 @@ const localizedSummary = localizedField(entry.data.summary, langParams);
 const localizedCoordinator = localizedField(entry.data.coordinator, langParams);
 const localizedContact = localizedField(entry.data.contact, langParams);
 const localizedSchedule = localizedField(entry.data.schedule, langParams);
+const galleryImages = entry.data.images ?? [];
 ---
 
 <BaseLayout
@@ -55,6 +56,8 @@ const localizedSchedule = localizedField(entry.data.schedule, langParams);
     title={localizedName}
     backgroundImage="/uploads/ministry-detail-bg.webp"
     lang={langParams}
+    heightClass="h-[30vh]"
+    positionClass="bg-bottom"
   />
   
   <section class="py-16">
@@ -64,10 +67,41 @@ const localizedSchedule = localizedField(entry.data.schedule, langParams);
           <div class="prose prose-lg max-w-none prose-headings:text-gray-900 prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-p:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900">
             <Content />
           </div>
+
+          {galleryImages.length > 0 && (
+            <div class="mt-12">
+              <h2 class="text-2xl font-bold mb-6">{t('ministryDetail.gallery')}</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {galleryImages.map((img) => (
+                  <a
+                    href={img}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block overflow-hidden rounded-lg group"
+                    aria-label={localizedName}
+                  >
+                    <img
+                      src={img}
+                      alt={localizedName}
+                      class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                      format="webp"
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div class="mt-12 flex justify-center lg:hidden">
+            <Button href={translatePath('/ministerios')} variant="outline">
+              {t('ministryDetail.backToAll')}
+            </Button>
+          </div>
         </div>
         
-        <div>
-          <div class="bg-gray-50 p-6 rounded-lg shadow-sm sticky top-24">
+        <div class="order-first lg:order-none -mb-[5vh] lg:mb-0">
+          <div class="bg-gray-50 p-6 rounded-lg shadow-sm lg:sticky lg:top-24">
             {entry.data.logo && (
               <div class="mb-6 flex justify-center">
                 <img src={entry.data.logo} alt={localizedName} class="max-h-48 w-auto" />
@@ -110,9 +144,11 @@ const localizedSchedule = localizedField(entry.data.schedule, langParams);
                 {t('ministryDetail.getInvolved')}
               </Button>
               
-              <Button href={translatePath('/ministerios')} variant="outline">
-                {t('ministryDetail.backToAll')}
-              </Button>
+              <div class="hidden lg:block">
+                <Button href={translatePath('/ministerios')} variant="outline">
+                  {t('ministryDetail.backToAll')}
+                </Button>
+              </div>
             </div>
           </div>
         </div>

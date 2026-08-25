@@ -540,8 +540,9 @@ export const ui = {
     'ministryDetail.contactLabel': 'Contacto',
     'ministryDetail.scheduleLabel': 'Horario',
     'ministryDetail.getInvolved': 'Involucrarse',
-    'ministryDetail.backToAll': 'Volver a Todos los Ministerios',
 
+    'ministryDetail.backToAll': 'Volver a Todos los Ministerios',
+    'ministryDetail.gallery': 'Galería',
     // ==================== SECTION COMPONENTS ====================
     'eventList.heading': 'Próximos Eventos',
     'eventList.subtitle': 'Acompáñanos en estos próximos eventos y sé parte de nuestra comunidad',
@@ -1066,8 +1067,9 @@ export const ui = {
     'ministryDetail.contactLabel': 'Contact',
     'ministryDetail.scheduleLabel': 'Schedule',
     'ministryDetail.getInvolved': 'Get Involved',
-    'ministryDetail.backToAll': 'Back to All Ministries',
 
+    'ministryDetail.backToAll': 'Back to All Ministries',
+    'ministryDetail.gallery': 'Gallery',
     // ==================== SECTION COMPONENTS ====================
     'eventList.heading': 'Upcoming Events',
     'eventList.subtitle': 'Join us for these upcoming events and become part of our community',

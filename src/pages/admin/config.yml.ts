@@ -105,6 +105,17 @@ collections:
     fields:
       - {label: "Name / Nombre", name: "name", widget: "string", i18n: true}
       - {label: "Logo", name: "logo", widget: "image", folder: "/uploads/ministries", required: false, i18n: duplicate}
+      - label: "Gallery / Galería"
+        name: "images"
+        widget: "list"
+        required: false
+        i18n: true
+        hint: "Additional images shown on the ministry page / Imágenes adicionales en la página del ministerio"
+        field:
+          label: "Image / Imagen"
+          name: "image"
+          widget: "image"
+          folder: "/uploads/ministries"
       - {label: "Summary / Resumen", name: "summary", widget: "text", i18n: true}
       - {label: "Coordinator / Coordinador", name: "coordinator", widget: "string", required: false, i18n: duplicate}
       - {label: "Contact / Contacto", name: "contact", widget: "string", required: false, i18n: duplicate, hint: "Email or phone / Email o teléfono"}

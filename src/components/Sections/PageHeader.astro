@@ -4,18 +4,28 @@ export interface Props {
   subtitle?: string;
   backgroundImage?: string;
   lang?: string;
+  heightClass?: string;
+  positionClass?: string;
 }
 
 const { 
   title, 
   subtitle, 
   backgroundImage = "/uploads/page-header-bg.webp",
-  lang = 'es'
+  lang = 'es',
+  heightClass,
+  positionClass,
 } = Astro.props;
+
+const sectionClasses = [
+  "relative bg-cover",
+  heightClass ? `${heightClass} flex items-center` : "py-20",
+  positionClass ?? "bg-center",
+].join(" ");
 ---
 
 <section 
-  class="relative py-20 bg-cover bg-center"
+  class={sectionClasses}
   style={`background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${backgroundImage})`}
 >
   <div class="container">

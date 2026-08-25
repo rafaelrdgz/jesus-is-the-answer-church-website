@@ -90,6 +90,7 @@ const ministriesCollection = defineCollection({
   schema: z.object({
     name: z.string(),
     logo: optionalImage(),
+    images: optionalImageList(),
     summary: z.string(),
     coordinator: optionalString(),
     contact: optionalString(),
